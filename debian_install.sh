@@ -33,12 +33,11 @@ apt install msmtp-mta bsd-mailx -y
 
 # Copy msmtp config
 cp .msmtprc /home/$user
-chown $user:$user /home/$user/.msmtprc
+chmod 600 /home/$user/.msmtprc
 
 # Get check_disk_size.sh
 mkdir /home/$user/scripts
 wget https://gist.githubusercontent.com/OlivierProTips/ceb4e778e44a27a7739db008f6b2488d/raw/check_disk_size.sh -O /home/$user/scripts/check_disk_size.sh
-chown -R $user:$user /home/$user/scripts
 chmod +x /home/$user/scripts/check_disk_size.sh
 
 # Add user to sudoers
@@ -50,7 +49,6 @@ echo "Setting VIM"
 echo "=============================="
 echo 'source $VIMRUNTIME/defaults.vim' >> /home/$user/.vimrc
 echo 'set mouse-=a' >> /home/$user/.vimrc
-chown $user:$user /home/$user/.vimrc
 echo 'source $VIMRUNTIME/defaults.vim' >> /root/.vimrc
 echo 'set mouse-=a' >> /root/.vimrc
 
@@ -62,6 +60,9 @@ crontab -u $user -l | { cat; echo "0 */6 * * * /home/olivier/scripts/check_disk_
 
 # Add alias
 echo "alias ll='ls -lah --color'" >> /home/$user/.bashrc
+
+# Chown all user folder
+chown -R $user:$user /home/$user
 
 # MANUAL STEPS
 echo " ------------------------------------- "
