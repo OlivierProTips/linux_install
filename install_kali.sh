@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Check if we are not root
+if [ "$EUID" -eq 0 ]
+then
+    echo "ERROR: Please do not run as root"
+    exit 1
+fi
+
 # aarch64
 # 
 archi=$(uname -m)
