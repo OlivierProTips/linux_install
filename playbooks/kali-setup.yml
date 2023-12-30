@@ -59,6 +59,7 @@
           - gobuster
           - python3-pip
           - python3.11-venv
+          - burpsuite
         state: present
 
     - name: Create terminator config folder
@@ -124,18 +125,18 @@
       become: true
       shell: python3 -m pip install simple-term-menu
 
-    - name: Copy arm burpsuite script
-      become: true
-      copy:
-        src: "burpsuite"
-        dest: "/usr/local/bin/"
-        mode: "+x"
-      when: ansible_architecture == 'aarch64' or ansible_architecture == 'arm64'
+    # - name: Copy arm burpsuite script
+    #   become: true
+    #   copy:
+    #     src: "burpsuite"
+    #     dest: "/usr/local/bin/"
+    #     mode: "+x"
+    #   when: ansible_architecture == 'aarch64' or ansible_architecture == 'arm64'
     
-    - name: Install arm burpsuite
-      become: true
-      shell: /usr/local/bin/burpsuite -u
-      when: ansible_architecture == 'aarch64' or ansible_architecture == 'arm64'
+    # - name: Install arm burpsuite
+    #   become: true
+    #   shell: /usr/local/bin/burpsuite -u
+    #   when: ansible_architecture == 'aarch64' or ansible_architecture == 'arm64'
 
     - name: Create Tools folder
       file:
