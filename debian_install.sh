@@ -56,7 +56,7 @@ crontab -u $user -l | { cat; echo "# Check disk size"; } | crontab -u $user -
 crontab -u $user -l | { cat; echo "0 */6 * * * /home/olivier/scripts/check_disk_size.sh"; } | crontab -u $user -
 
 # Add alias
-echo "alias ll='ls -lah --color'" >> /home/$user/.bashrcÒ
+echo "alias ll='ls -lah --color'" >> /home/$user/.bashrc
 
 # MANUAL STEPS
 echo " ------------------------------------- "
