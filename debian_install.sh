@@ -1,5 +1,6 @@
 #!/bin/bash
 # DRAFT
+# git clone -b dev https://github.com/olivierprotips/linux_install
 
 # Check if we are root
 if [ "$EUID" -ne 0 ]
@@ -74,10 +75,10 @@ apt install unattended-upgrades apt-listchanges -y
 # chmod 600 /home/$user/.msmtprc
 cp msmtprc /etc/msmtprc
 chmod 600 /etc/msmtprc
-sed -ni "/from/s/ .*/ $MAILFROM/" /etc/msmtprc
-sed -ni "/user/s/ .*/ $MAILFROM/" /etc/msmtprc
-sed -ni "/password/s/ .*/ $MAILPASSWORD/" /etc/msmtprc
-sed -ni "/host/s/ .*/ $MAILHOST/" /etc/msmtprc
+sed -i "/from/s/ .*/ $MAILFROM/" /etc/msmtprc
+sed -i "/user/s/ .*/ $MAILFROM/" /etc/msmtprc
+sed -i "/password/s/ .*/ $MAILPASSWORD/" /etc/msmtprc
+sed -i "/host/s/ .*/ $MAILHOST/" /etc/msmtprc
 
 # Get check_disk_size.sh
 mkdir /home/$user/scripts
@@ -120,11 +121,11 @@ chown -R $user:$user /home/$user
 
 # Configure unattended
 cp /usr/share/unattended-upgrades/20auto-upgrades /etc/apt/apt.conf.d/20auto-upgrades
-sed -ni '/origin=Debian,codename=\${distro_codename}-updates/s/\/\///g' /etc/apt/apt.conf.d/50unattended-upgrades
-sed -ni '/Unattended-Upgrade::SyslogEnable/s/\/\///g' /etc/apt/apt.conf.d/50unattended-upgrades
-sed -ni '/Unattended-Upgrade::Mail/s/\/\///' /etc/apt/apt.conf.d/50unattended-upgrades
-sed -ni "/Unattended-Upgrade::Mail /s/ .*/ $MAILTO/" /etc/apt/apt.conf.d/50unattended-upgrades
-sed -ni "/email_address=/s/=.*/=$MAILTO/" /etc/apt/listchanges.conf
+sed -i '/origin=Debian,codename=\${distro_codename}-updates/s/\/\///g' /etc/apt/apt.conf.d/50unattended-upgrades
+sed -i '/Unattended-Upgrade::SyslogEnable/s/\/\///g' /etc/apt/apt.conf.d/50unattended-upgrades
+sed -i '/Unattended-Upgrade::Mail/s/\/\///' /etc/apt/apt.conf.d/50unattended-upgrades
+sed -i "/Unattended-Upgrade::Mail /s/ .*/ $MAILTO/" /etc/apt/apt.conf.d/50unattended-upgrades
+sed -i "/email_address=/s/=.*/=$MAILTO/" /etc/apt/listchanges.conf
 
 # MANUAL STEPS
 myTasks=(

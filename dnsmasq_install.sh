@@ -8,13 +8,13 @@ NetworkManager_file="/etc/NetworkManager/NetworkManager.conf"
 dns_exist=$(grep "dns=" ${NetworkManager_file})
 if [[ -n ${dns_exist} ]]
 then
-    sudo sed -ni '/dns=/c dns=dnsmasq' ${NetworkManager_file}
+    sudo sed -i '/dns=/c dns=dnsmasq' ${NetworkManager_file}
 else
-    sudo sed -ni '/\[main\]/a dns=dnsmasq' ${NetworkManager_file}
+    sudo sed -i '/\[main\]/a dns=dnsmasq' ${NetworkManager_file}
 fi
 
 # Uncomment conf-dir in /etc/dnsmasq.conf
-sudo sed -ni '/conf-dir=\/etc\/dnsmasq.d\/,\*.conf/s/^#//g' /etc/dnsmasq.conf
+sudo sed -i '/conf-dir=\/etc\/dnsmasq.d\/,\*.conf/s/^#//g' /etc/dnsmasq.conf
 
 # Create a personal conf file
 cat <<'EOF' | sudo tee /etc/dnsmasq.d/perso.conf
