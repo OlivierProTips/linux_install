@@ -61,13 +61,20 @@ echo "=============================="
 apt install msmtp-mta bsd-mailx -y
 
 # Copy msmtp config
-cp .msmtprc /home/$user
-chmod 600 /home/$user/.msmtprc
+# cp .msmtprc /home/$user
+# chmod 600 /home/$user/.msmtprc
+cp msmtprc /etc/msmtprc
+chmod 600 /etc/msmtprc
 
 # Get check_disk_size.sh
 mkdir /home/$user/scripts
 wget https://gist.githubusercontent.com/OlivierProTips/ceb4e778e44a27a7739db008f6b2488d/raw/check_disk_size.sh -O /home/$user/scripts/check_disk_size.sh
 chmod +x /home/$user/scripts/check_disk_size.sh
+
+# Get aptcheck.sh
+mkdir /root/scripts
+wget https://gist.githubusercontent.com/OlivierProTips/7143d92877d1871e1367ff98e6905402/raw/aptcheck.sh -O /root/scripts/aptcheck.sh
+chmod u+x /root/scripts/aptcheck.sh
 
 # Add user to sudoers
 adduser $user sudo
@@ -81,11 +88,17 @@ echo 'set mouse-=a' >> /home/$user/.vimrc
 echo 'source $VIMRUNTIME/defaults.vim' >> /root/.vimrc
 echo 'set mouse-=a' >> /root/.vimrc
 
-# Add check disk size to cron
+# Add check disk size to user cron
 crontab -u $user -l | { cat; echo; echo "MAILTO=[MAIL]"; } | crontab -u $user -
 crontab -u $user -l | { cat; echo "MAILFROM=[MAIL]"; } | crontab -u $user -
 crontab -u $user -l | { cat; echo; echo "# Check disk size"; } | crontab -u $user -
 crontab -u $user -l | { cat; echo "0 */1 * * * /home/$user/scripts/check_disk_size.sh"; } | crontab -u $user -
+
+# Add apt check to root cron
+crontab -l | { cat; echo; echo "MAILTO=[MAIL]"; } | crontab -
+crontab -l | { cat; echo "MAILFROM=[MAIL]"; } | crontab -
+crontab -l | { cat; echo; echo "# Check if server can be updated"; } | crontab -
+crontab -l | { cat; echo "0 12 * * * /root/scripts/aptcheck.sh"; } | crontab -
 
 # Add alias
 echo "alias ll='ls -lah --color'" >> /home/$user/.bashrc
@@ -95,8 +108,8 @@ chown -R $user:$user /home/$user
 
 # MANUAL STEPS
 myTasks=(
-    "Edit .msmtprc file"
-    "Edit MAIL in crontab"
+    "Edit /etc/msmtprc file"
+    "Edit MAIL in crontab (root and $user)"
 )
 listDisplay "MANUAL STEPS"
 
