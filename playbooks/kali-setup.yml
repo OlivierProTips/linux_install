@@ -32,11 +32,11 @@
         msg: |
           user_name: {{ user_name.stdout }}
           user_desktop: {{ user_desktop.stdout }}
-          arch: {{ arch }}
+          arch: {{ arch.stdout }}
 
     - name: Install vscode
       apt: 
-        deb: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-{{ arch }}" 
+        deb: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-{{ arch.stdout }}" 
 
     - name: Install VSCode
       become: true
