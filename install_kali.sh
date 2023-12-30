@@ -44,6 +44,18 @@ wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/Terminator/
 mkdir -p ~/.config/terminator
 mv config ~/.config/terminator/config
 
+# FEROXBUSTER
+echo "=============================="
+echo "Installing FEROXBUSTER"
+echo "=============================="
+sudo apt install feroxbuster -y
+
+# GOBUSTER
+echo "=============================="
+echo "Installing GOBUSTER"
+echo "=============================="
+sudo apt install gobuster -y
+
 # PWNCAT-CS
 echo "=============================="
 echo "Installing PWNCAT-CS"
