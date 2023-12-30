@@ -8,6 +8,35 @@ then
     exit 1
 fi
 
+listDisplay() {
+
+    # retrieve size of the longest string in myTask
+    max_size=-1
+    for x in "${myTasks[@]}"
+    do
+        if [ ${#x} -gt $max_size ]
+        then
+            max_size=${#x}
+        fi
+    done
+
+    # Check if title is longer than longest string is myTasks
+    if  [ ${#1} -gt $max_size ]; then max_size=${#1}; fi
+
+    # Display with padding
+    max_size=$(expr $max_size + 1)
+    msg="| $1$(for ((i=${#1}; i<$max_size; i++)); do echo -n " "; done)|"
+    edge="+$(for ((i=0; i<=$max_size; i++)); do echo -n "-"; done)+"
+    echo "$edge"
+    echo "$msg"
+    echo "$edge"
+    for task in "${myTasks[@]}"; do
+        task_msg="| $task$(for ((i=${#task}; i<$max_size; i++)); do echo -n " "; done)|"
+        echo "$task_msg"
+    done
+    echo "$edge"
+}
+
 # Retrieve username with uid 1000
 user=$(cat /etc/passwd | grep 1000 | cut -d":" -f1)
 if [[ -z $user ]]
@@ -65,11 +94,10 @@ echo "alias ll='ls -lah --color'" >> /home/$user/.bashrc
 chown -R $user:$user /home/$user
 
 # MANUAL STEPS
-echo " ------------------------------------- "
-echo "| MANUAL STEPS                        |"
-echo " ------------------------------------- "
-echo "| Edit .msmtprc file                  |"
-echo "| Edit MAIL in crontab                |"
-echo " ------------------------------------- "
+myTasks=(
+    "Edit .msmtprc file"
+    "Edit MAIL in crontab"
+)
+listDisplay "MANUAL STEPS"
 
 # reboot
