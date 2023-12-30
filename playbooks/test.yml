@@ -12,7 +12,7 @@
     - name: Install ligolo-ng
       become: true
       shell: |
-        sudo git clone https://github.com/nicocha30/ligolo-ng /opt/ligolo-ng
+        git clone https://github.com/nicocha30/ligolo-ng /opt/ligolo-ng
         cd /opt/ligolo-ng
-        sudo go build -o agent cmd/agent/main.go
-        sudo go build -o proxy cmd/proxy/main.go
+        go build -o agent cmd/agent/main.go
+        go build -o proxy cmd/proxy/main.go
