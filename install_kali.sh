@@ -113,6 +113,7 @@ wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/vpn
 sudo mv vpnchoice.py /usr/local/bin/vpnchoice
 sudo chmod +x /usr/local/bin/vpnchoice
 echo "alias vpnchoice='sudo vpnchoice'" >> ~/.zshrc
+sudo python3 -m pip install simple-term-menu
 
 # MANUAL STEPS
 echo " ------------------------------------- "
