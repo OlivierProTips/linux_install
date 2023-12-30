@@ -28,9 +28,9 @@ sudo add-apt-repository "deb [arch=${arch,,}] https://packages.microsoft.com/rep
 sudo apt update
 sudo apt install code -y
 
-# code --install-extension donjayamanne.python-extension-pack --force
-# code --install-extension donjayamanne.git-extension-pack --force
-# code --install-extension ms-vscode.sublime-keybindings --force
+code --install-extension donjayamanne.python-extension-pack --force
+code --install-extension donjayamanne.git-extension-pack --force
+code --install-extension ms-vscode.sublime-keybindings --force
 
 # TERMINATOR
 echo "=============================="
