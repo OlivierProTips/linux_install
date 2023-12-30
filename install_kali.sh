@@ -121,3 +121,6 @@ read -p "Press any key to continue ..."
 code --install-extension donjayamanne.python-extension-pack --force
 code --install-extension donjayamanne.git-extension-pack --force
 code --install-extension ms-vscode.sublime-keybindings --force
+
+# MANUAL STEPS
+# Default application: Terminator
