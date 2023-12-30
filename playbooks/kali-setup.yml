@@ -57,6 +57,7 @@
 
     - name: Add pipx path
       lineinfile:
+        dest: "~/.zshrc"
         line: 'export PATH="$PATH:/home/kali/.local/bin"'
 
     - name: Install pwncat-cs
