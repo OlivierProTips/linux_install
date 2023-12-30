@@ -79,7 +79,7 @@
         name: "{{item.0}}"
         value: "{{ debian_smtp_user }}"
         user: "{{item.1}}"
-      with_items:
+      with_nested:
         - ['MAILTO', 'MAILFROM']
         - ["{{ debian_user }}", 'root']
 
