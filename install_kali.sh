@@ -102,11 +102,15 @@ sudo mv nmaper.py /usr/local/bin/nmaper
 sudo chmod +x /usr/local/bin/nmaper
 
 # LESS
-# echo "=============================="
-# echo "Installing LESS"
-# echo "=============================="
-# sudo mv less.sh /usr/local/bin
-# sudo chmod +x /usr/local/bin/less.sh
+echo "=============================="
+echo "Installing LESS"
+echo "=============================="
+mv less.sh ~
+chmod +x ~/less.sh
+if [[ -d ~/Desktop ]]
+then
+    mv ~/less.sh ~/Desktop
+fi
 
 # BURPSUITE
 if [[ ${arch} == "arm64" ]]
