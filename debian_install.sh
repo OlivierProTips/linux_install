@@ -124,7 +124,7 @@ cp /usr/share/unattended-upgrades/20auto-upgrades /etc/apt/apt.conf.d/20auto-upg
 sed -i '/origin=Debian,codename=\${distro_codename}-updates/s/\/\///g' /etc/apt/apt.conf.d/50unattended-upgrades
 sed -i '/Unattended-Upgrade::SyslogEnable/s/\/\///g' /etc/apt/apt.conf.d/50unattended-upgrades
 sed -i '/Unattended-Upgrade::Mail/s/\/\///' /etc/apt/apt.conf.d/50unattended-upgrades
-sed -i "/Unattended-Upgrade::Mail /s/ .*/ $MAILTO/" /etc/apt/apt.conf.d/50unattended-upgrades
+sed -i "/Unattended-Upgrade::Mail /s/ .*/ \"$MAILTO\"/" /etc/apt/apt.conf.d/50unattended-upgrades
 sed -i "/email_address=/s/=.*/=$MAILTO/" /etc/apt/listchanges.conf
 
 # MANUAL STEPS
