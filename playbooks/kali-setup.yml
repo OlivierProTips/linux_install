@@ -119,17 +119,11 @@
         dest: "~/.zshrc"
         line: 'export PATH="$PATH:/home/{{ user_name.stdout }}/.local/bin"'
 
-    - name: Install pipx
+    - name: Install pipx / pwncat-cs / autorecon
       shell: |
         python3 -m pip install --user pipx
         export PATH="$PATH:/home/{{ user_name.stdout }}/.local/bin"
-
-    - name: Install pwncat-cs
-      shell: |
         pipx install pwncat-cs
-
-    - name: Install autorecon
-      shell: |
         pipx install git+https://github.com/Tib3rius/AutoRecon.git
 
     - name: Setting VIM
