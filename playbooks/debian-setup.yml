@@ -83,6 +83,14 @@
         - ['MAILTO', 'MAILFROM']
         - ["{{ debian_user }}", 'root']
 
+    - name: Add path variable in crontab
+      cronvar:
+        name: "PATH"
+        value: "/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
+        user: "{{item.1}}"
+      with_nested:
+        - ["{{ debian_user }}", 'root']
+
     - name: change user passwords
       user:
         name: "{{ debian_user }}"
