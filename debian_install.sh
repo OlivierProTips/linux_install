@@ -22,9 +22,9 @@ DEBIAN_FRONTEND=noninteractive apt update
 
 # Install packages
 echo "=============================="
-echo "Install git vim htop sudo wget"
+echo "Install packages"
 echo "=============================="
-apt install git vim htop sudo wget -y
+apt install git vim htop sudo wget nfs-common -y
 
 echo "=============================="
 echo "Install msmtp-mta bsd-mailx"
