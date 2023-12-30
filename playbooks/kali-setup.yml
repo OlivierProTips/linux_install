@@ -65,3 +65,25 @@
         python3 -m pip install --user pipx
         export PATH="$PATH:/home/kali/.local/bin"
         pipx install pwncat-cs
+
+    - name: Setting VIM
+      become: true
+      copy:
+        dest: "{{ item }}"
+        content: |
+          source $VIMRUNTIME/defaults.vim
+          set mouse-=a
+      with_items:
+        - /home/kali/.vimrc
+        - /root/.vimrc
+
+    - name: Copy scripts
+      become: true
+      copy:
+        src: "{{ item }}"
+        dest: "/usr/local/bin/"
+        mode: "+x"
+      with_items:
+        - "upload"
+        - "monip"
+        - "nmaper"
