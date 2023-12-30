@@ -31,12 +31,17 @@
         fi
       register: arch
 
+    - name: Get Virtual Env
+      shell: systemd-detect-virt | awk '{print tolower($0)}'
+      register: virt_env
+
     - name: Debug variables
       debug:
         msg: 
           - "user_name: {{ user_name.stdout }}"
           - "user_desktop: {{ user_desktop.stdout }}"
           - "arch: {{ arch.stdout }}"
+          - "virt_env: {{ virt_env.stdout }}"
 
     - name: Install vscode
       become: true
@@ -147,10 +152,6 @@
       shell: |
         cd ~/Tools/
         ./update-resources.sh
-
-    - name: Get Virtual Env
-      shell: systemd-detect-virt | awk '{print tolower($0)}'
-      register: virt_env
 
     - name: Install resizer
       copy:
