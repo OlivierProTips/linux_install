@@ -1,5 +1,5 @@
 ---
-- hosts: debiantest
+- hosts: debian
 
   become: true
   become_method: su
