@@ -180,4 +180,10 @@ echo "| Set Default application: Terminator |"
 echo "| Synchronize VSCode                  |"
 echo "| Synchronize Firefox                 |"
 echo "| Set time if needed                  |"
+echo "| BurpSuite Plugins:                  |"
+echo "|   HackVector                        |"
+echo "|   Turbo Intruder                    |"
 echo " ------------------------------------- "
+
+# TODO
+# - [ ] tldr: install npm -> npm install -g tldr
