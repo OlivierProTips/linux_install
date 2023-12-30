@@ -44,6 +44,18 @@ wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/Terminator/
 mkdir -p ~/.config/terminator
 mv config ~/.config/terminator/config
 
+# ROCKYOU
+echo "=============================="
+echo "Installing ROCKYOU"
+echo "=============================="
+sudo gunzip -d /usr/share/wordlists/rockyou.txt.gz
+
+# SECLISTS
+echo "=============================="
+echo "Installing SECLISTS"
+echo "=============================="
+sudo apt install seclists -y
+
 # FEROXBUSTER
 echo "=============================="
 echo "Installing FEROXBUSTER"
