@@ -104,7 +104,7 @@ sudo apt install gobuster -y
 
 # PWNCAT-CS
 banner "Installing PWNCAT-CS"
-sudo DEBIAN_FRONTEND=noninteractive apt install python3-pip -y
+sudo DEBIAN_FRONTEND=noninteractive apt install python3-pip python3.11-env -y
 python3 -m pip install --user pipx
 python3 -m pipx ensurepath
 export PATH=/home/kali/.local/bin:$PATH
