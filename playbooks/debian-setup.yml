@@ -76,9 +76,9 @@
 
     - name: Add mail variables in crontab
       community.general.cronvar:
-        name: {{item.0}}
-        value: {{ debian_smtp_user }}
-        user: {{item.1}}
+        name: "{{item.0}}"
+        value: "{{ debian_smtp_user }}"
+        user: "{{item.1}}"
       with_items:
         - ['MAILTO', 'MAILFROM']
         - [{{ debian_user }}, 'root']
