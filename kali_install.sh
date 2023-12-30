@@ -179,6 +179,12 @@ then
     chmod +x $(xdg-user-dir DESKTOP)/*.sh
 fi
 
+# TOOLS
+echo "=============================="
+echo "Installing DNSMASQ"
+echo "=============================="
+./dnsmasq_install.sh
+
 # MANUAL STEPS
 echo " ------------------------------------- "
 echo "| MANUAL STEPS                        |"
@@ -190,6 +196,7 @@ echo "| Set time if needed                  |"
 echo "| BurpSuite Plugins:                  |"
 echo "|   HackVector                        |"
 echo "|   Turbo Intruder                    |"
+echo "| Install Notion                      |"
 echo " ------------------------------------- "
 
 # TODO
