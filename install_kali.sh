@@ -15,8 +15,6 @@ fi
 #     exit
 # fi
 
-cd
-
 sudo DEBIAN_FRONTEND=noninteractive apt update
 # sudo DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
 
@@ -75,13 +73,11 @@ echo "=============================="
 echo "Installing PWNCAT-CS"
 echo "=============================="
 sudo DEBIAN_FRONTEND=noninteractive apt install python3.10-venv -y
-mkdir Tools
-cd Tools
-python3 -m venv pwncat-env
-source ./pwncat-env/bin/activate
+mkdir ~/Tools
+python3 -m venv ~/Tools/pwncat-env
+source ~/Tools/pwncat-env/bin/activate
 pip install pwncat-cs
 deactivate
-cd
 
 # VIM
 echo "=============================="
