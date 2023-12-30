@@ -43,11 +43,6 @@
       apt: 
         deb: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-{{ arch.stdout }}" 
 
-    - name: Install VSCode
-      become: true
-      apt:
-        deb: /tmp/vscode.deb
-
     - name: Install packages
       become: true
       apt:
