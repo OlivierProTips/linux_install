@@ -56,7 +56,7 @@ echo 'set mouse-=a' >> /root/.vimrc
 crontab -u $user -l | { cat; echo; echo "MAILTO=[MAIL]"; } | crontab -u $user -
 crontab -u $user -l | { cat; echo "MAILFROM=[MAIL]"; } | crontab -u $user -
 crontab -u $user -l | { cat; echo; echo "# Check disk size"; } | crontab -u $user -
-crontab -u $user -l | { cat; echo "0 */6 * * * /home/$user/scripts/check_disk_size.sh"; } | crontab -u $user -
+crontab -u $user -l | { cat; echo "0 */1 * * * /home/$user/scripts/check_disk_size.sh"; } | crontab -u $user -
 
 # Add alias
 echo "alias ll='ls -lah --color'" >> /home/$user/.bashrc
