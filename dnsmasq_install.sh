@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install dnsmasq
-sudo apt install dnsmasq
+sudo apt install dnsmasq -y
 
 # Add dns=dnsmasq to /etc/NetworkManager/NetworkManager.conf
 NetworkManager_file="/etc/NetworkManager/NetworkManager.conf"
