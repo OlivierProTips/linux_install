@@ -77,7 +77,7 @@ apt install unattended-upgrades apt-listchanges -y
 # cp .msmtprc /home/$user
 # chmod 600 /home/$user/.msmtprc
 cp msmtprc /etc/msmtprc
-chmod 600 /etc/msmtprc
+chmod 644 /etc/msmtprc
 sed -i "/from/s/ .*/ $MAILFROM/" /etc/msmtprc
 sed -i "/user/s/ .*/ $MAILFROM/" /etc/msmtprc
 sed -i "/password/s/ .*/ $MAILPASSWORD/" /etc/msmtprc
