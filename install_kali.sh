@@ -65,26 +65,24 @@ echo "=============================="
 echo "Installing UPLOAD"
 echo "=============================="
 wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/upload_file_wget.sh
-mv upload_file_wget.sh /usr/local/bin
-chmod +x /usr/local/bin/upload_file_wget.sh
+mv upload_file_wget.sh /usr/local/bin/upload_file_wget
+chmod +x /usr/local/bin/upload_file_wget
 
 # MONIP
 echo "=============================="
 echo "Installing MONIP"
 echo "=============================="
 wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/monip.sh
-mv monip.sh /usr/local/bin
-chmod +x /usr/local/bin/monip.sh
-ln -s /usr/local/bin/monip.sh /usr/local/bin/monip
+mv monip.sh /usr/local/bin/monip
+chmod +x /usr/local/bin/monip
 
 # NMAPER
 echo "=============================="
 echo "Installing NMAPER"
 echo "=============================="
 wget https://raw.githubusercontent.com/OlivierProTips/nmaper/master/nmaper.py
-mv nmaper.py /usr/local/bin
-chmod +x /usr/local/bin/nmaper.py
-ln -s /usr/local/bin/nmaper.py /usr/local/bin/nmaper
+mv nmaper.py /usr/local/bin/nmaper
+chmod +x /usr/local/bin/nmaper
 
 # ip_widget
 echo "=============================="
@@ -106,3 +104,10 @@ then
 else
     echo "less.sh has not been moved"
 fi
+
+# BURPSUITE
+echo "=============================="
+echo "Installing BURPSUITE"
+echo "=============================="
+mv burp* /usr/local/bin
+chmod +x /usr/local/bin/burp*
