@@ -89,7 +89,7 @@
         value: "/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"
         user: "{{ item }}"
       with_items:
-        - {{ debian_user }}
+        - '{{ debian_user }}'
         - root
 
     - name: change user passwords
