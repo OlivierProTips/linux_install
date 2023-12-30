@@ -213,4 +213,4 @@ alias ll='ls --color=always -hla'
 alias h='history'
 alias openport="awk -F/ '/open/{print \$1}{ORS=\",\"}'"
 alias vpnchoice="sudo vpnchoice"
-
+alias pwncatenv='source ~/Tools/pwncat-env/bin/activate'

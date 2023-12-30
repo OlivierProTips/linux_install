@@ -78,6 +78,7 @@ python3 -m venv ~/Tools/pwncat-env
 source ~/Tools/pwncat-env/bin/activate
 pip install pwncat-cs
 deactivate
+echo "alias pwncatenv='source ~/Tools/pwncat-env/bin/activate'" >> ~/.zshrc
 
 # VIM
 echo "=============================="
