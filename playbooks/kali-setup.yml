@@ -22,14 +22,14 @@
         archi=$(uname -m)
         if [ "${archi}" = "aarch64" ]
         then
-            arch="arm64"
+            echo "arm64"
         elif [ "${archi}" = "arm64" ]
         then
-            arch="arm64"
+            echo "arm64"
         else
-            arch="x64"
+            echo "x64"
         fi
-      register: arch
+      register: arch.stdout
 
     - name: Debug variables
       debug:
