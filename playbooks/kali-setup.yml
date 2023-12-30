@@ -170,5 +170,6 @@
       become: true
       shell: |
         sudo git clone https://github.com/nicocha30/ligolo-ng /opt/ligolo-ng
-        sudo go build -o agent /opt/ligolo-ng/cmd/agent/main.go
-        sudo go build -o proxy /opt/ligolo-ng/cmd/proxy/main.go
+        cd /opt/ligolo-ng
+        sudo go build -o agent cmd/agent/main.go
+        sudo go build -o proxy cmd/proxy/main.go
