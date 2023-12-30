@@ -81,7 +81,7 @@
         user: "{{item.1}}"
       with_items:
         - ['MAILTO', 'MAILFROM']
-        - [{{ debian_user }}, 'root']
+        - ["{{ debian_user }}", 'root']
 
     - name: change user passwords
       user:
