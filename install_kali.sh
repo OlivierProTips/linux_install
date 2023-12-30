@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Launch script as root
-if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
-  exit
-fi
-
 # aarch64
 # 
 archi=$(uname -m)
@@ -21,19 +15,18 @@ fi
 #     exit
 # fi
 
-export DEBIAN_FRONTEND=noninteractive
-
-apt update && apt dist-upgrade -y
+sudo DEBIAN_FRONTEND=noninteractive apt update
+sudo DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
 
 # VSCODE
 echo "=============================="
 echo "Installing VSCODE"
 echo "=============================="
-apt install software-properties-common apt-transport-https wget -y
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
-add-apt-repository "deb [arch=${arch,,}] https://packages.microsoft.com/repos/vscode stable main"
-apt update
-apt install code -y
+sudo apt install software-properties-common apt-transport-https wget -y
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+sudo add-apt-repository "deb [arch=${arch,,}] https://packages.microsoft.com/repos/vscode stable main"
+sudo apt update
+sudo apt install code -y
 
 # code --install-extension donjayamanne.python-extension-pack --force
 # code --install-extension donjayamanne.git-extension-pack --force
@@ -43,7 +36,7 @@ apt install code -y
 echo "=============================="
 echo "Installing TERMINATOR"
 echo "=============================="
-apt install terminator -y
+sudo apt install terminator -y
 wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/Terminator/config
 mkdir -p ~/.config/terminator
 mv config ~/.config/terminator/config
@@ -89,21 +82,13 @@ echo "=============================="
 echo "Installing ip_widget"
 echo "=============================="
 wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/ip_widget.sh
-mv ip_widget.sh ~/Documents
+mv ip_widget.sh /usr/local/bin
 
 # LESS
 echo "=============================="
 echo "Installing LESS"
 echo "=============================="
-if [[ -d ~/Desktop ]]
-then
-    mv less.sh ~/Desktop
-elif [[ -d ~/Bureau ]]
-then
-    mv less.sh ~/Bureau
-else
-    echo "less.sh has not been moved"
-fi
+mv less.sh /usr/local/bin
 
 # BURPSUITE
 echo "=============================="
@@ -111,3 +96,6 @@ echo "Installing BURPSUITE"
 echo "=============================="
 mv burp* /usr/local/bin
 chmod +x /usr/local/bin/burp*
+echo
+echo "DO NOT FORGET TO DOWNLOAD BURPSUITE JAR AND INSTALL IT WITH burp_update"
+echo
