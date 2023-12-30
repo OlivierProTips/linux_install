@@ -29,11 +29,14 @@
         else
             echo "x64"
         fi
-      register: arch.stdout
+      register: arch
 
     - name: Debug variables
       debug:
-        msg: "arch: {{ arch }}"
+        msg: 
+          - "user_name: {{ user_name.stdout }}"
+          - "user_desktop: {{ user_desktop.stdout }}"
+          - "arch: {{ arch.stdout }}"
 
     - name: Install vscode
       apt: 
