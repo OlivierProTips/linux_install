@@ -52,6 +52,8 @@ echo 'source $VIMRUNTIME/defaults.vim' >> /root/.vimrc
 echo 'set mouse-=a' >> /root/.vimrc
 
 # Add check disk size to cron
+crontab -u $user -l | { cat; echo "MAILTO=[MAIL]"; } | crontab -u $user -
+crontab -u $user -l | { cat; echo "MAILFROM=[MAIL]"; } | crontab -u $user -
 crontab -u $user -l | { cat; echo "# Check disk size"; } | crontab -u $user -
 crontab -u $user -l | { cat; echo "0 */6 * * * /home/olivier/scripts/check_disk_size.sh"; } | crontab -u $user -
 
@@ -63,6 +65,7 @@ echo " ------------------------------------- "
 echo "| MANUAL STEPS                        |"
 echo " ------------------------------------- "
 echo "| Fill .msmtprc file                  |"
+echo "| Edit MAIL in crontab                |"
 echo " ------------------------------------- "
 
 # reboot
