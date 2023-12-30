@@ -1,0 +1,49 @@
+---
+- hosts: kali
+
+  tasks:
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 #One day
+
+    - name: Download arm vscode
+      get_url: url=https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64 dest=/tmp/vscode.deb
+      when: ansible_architecture == 'aarch64' or ansible_architecture == 'arm64'
+
+    - name: Download x64 vscode
+      get_url: url=https://code.visualstudio.com/sha/download?build=stable&os=x64 dest=/tmp/vscode.deb
+      when: ansible_architecture != 'aarch64' and ansible_architecture != 'arm64'
+
+    - name: Install VSCode
+      become: true
+      apt:
+        deb: /tmp/vscode.deb
+
+    - name: Install packages
+      become: true
+      apt:
+        name: 
+          - ncdu
+          - terminator
+          - seclists
+          - feroxbuster
+          - gobuster
+        state: present
+
+    - name: Create terminator config folder
+      file:
+        path: "~/.config/terminator"
+        state: directory
+
+    - name: Copy terminator config file
+      copy:
+        src: "terminator_config"
+        dest: "~/.config/terminator/config"
+
+    - name: Unpack rockyou
+      become: true
+      shell: gunzip -d /usr/share/wordlists/rockyou.txt.gz
+      ignore_errors: yes
