@@ -1,0 +1,18 @@
+---
+- hosts: kali
+
+  tasks:
+    - name: Install packages
+      become: true
+      apt:
+        name: 
+          - golang-go
+        state: present
+
+    - name: Install ligolo-ng
+      become: true
+      shell: |
+        sudo git clone https://github.com/nicocha30/ligolo-ng /opt/ligolo-ng
+        cd /opt/ligolo-ng
+        sudo go build -o agent cmd/agent/main.go
+        sudo go build -o proxy cmd/proxy/main.go
