@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ -z $1 || ($1 != "ARM64" && $1 != "AMD64") ]]
+then
+    echo "Use AMD64 or ARM64 as parameter"
+    exit
+fi
+
 cd /tmp
 mkdir -p kali_install
 cd kali_install
@@ -7,7 +13,7 @@ cd kali_install
 # VSCODE
 sudo apt install software-properties-common apt-transport-https wget
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+sudo add-apt-repository "deb [arch=${1,,}] https://packages.microsoft.com/repos/vscode stable main"
 sudo apt install code -y
 
 code --install-extension donjayamanne.python-extension-pack --force
