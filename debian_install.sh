@@ -16,7 +16,7 @@ source data
 
 banner() {
     msg="| $* |"
-    edge="+ $(echo "$*" | sed 's/./-/g') +"
+    edge="+-$(echo "$*" | sed 's/./-/g')-+"
     echo "$edge"
     echo "$msg"
     echo "$edge"
