@@ -92,6 +92,11 @@
         - "monip"
         - "nmaper"
         - "vpnchoice"
+
+    - name: Create vpnchoice folder
+      file:
+        path: "~/ovpn_files"
+        state: directory
     
     - name: Install simple-term-menu
       become: true
