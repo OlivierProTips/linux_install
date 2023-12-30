@@ -68,7 +68,7 @@ chown -R $user:$user /home/$user
 echo " ------------------------------------- "
 echo "| MANUAL STEPS                        |"
 echo " ------------------------------------- "
-echo "| Fill .msmtprc file                  |"
+echo "| Edit .msmtprc file                  |"
 echo "| Edit MAIL in crontab                |"
 echo " ------------------------------------- "
 
