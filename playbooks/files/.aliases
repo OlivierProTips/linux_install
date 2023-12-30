@@ -1,0 +1,30 @@
+alias ll='ls --color=always -hla'
+alias h='history'
+alias openport="awk -F/ '/open/{print \$1}{ORS=\",\"}'"
+alias vpnchoice='sudo vpnchoice'
+alias folders='sudo mount-shared-folders'
+
+function ctfstrings {
+    if [[ -f "$1" ]]; then
+        echo "-L:"
+        strings -e L "$1"
+        echo
+        echo "-l:"
+        strings -e l "$1"
+        echo
+        echo "-S:"
+        strings -e S "$1"
+        echo
+        echo "-s:"
+        strings -e s "$1"
+        echo
+        echo "-B:"
+        strings -e B "$1"
+        echo
+        echo "-b:"
+        strings -e b "$1"
+        echo
+    else
+        echo "Usage: $0 <file>"
+    fi
+}

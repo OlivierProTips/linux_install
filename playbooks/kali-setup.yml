@@ -83,6 +83,19 @@
     #     src: ".zshrc"
     #     dest: "~/.zshrc"
 
+    - name: Copy aliases
+      copy:
+        src: ".aliases"
+        dest: "~"
+
+    - name: Load aliases in .zshrc
+      blockinfile:
+        path: "~/.zshrc"
+        block: |
+          if [ -f ~/.aliases ]; then
+              . ~/.aliases
+          fi
+
     - name: Add pipx path
       lineinfile:
         dest: "~/.zshrc"
@@ -173,3 +186,25 @@
         cd /opt/ligolo-ng
         go build -o agent cmd/agent/main.go
         go build -o proxy cmd/proxy/main.go
+
+    - name: Set dnsmasq
+      become: true
+      shell: |
+        NetworkManager_file="/etc/NetworkManager/NetworkManager.conf"
+        dns_exist=$(grep "dns=" ${NetworkManager_file})
+        if [[ -n ${dns_exist} ]]
+        then
+            sudo sed -i '/dns=/c dns=dnsmasq' ${NetworkManager_file}
+        else
+            sudo sed -i '/\[main\]/a dns=dnsmasq' ${NetworkManager_file}
+        fi
+
+    - name: Create dnsmasq file
+      become: true
+      blockinfile:
+        path: /etc/NetworkManager/dnsmasq.d/perso.conf
+        create: true
+        block: |
+          server=8.8.8.8
+
+          address=/.example.com/93.184.216.34
