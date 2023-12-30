@@ -27,6 +27,7 @@ while IFS=' ' read -ra ADDR; do
     if [[ "${ADDR[0]}" == "lo" ]]; then continue; fi
     echo "${ADDR[0]}:"
     echo " wget http://${ADDR[1]}:$port/$file_name"
+    echo " curl http://${ADDR[1]}:$port/$file_name | bash"
 done <<< "$IPs"
 
 echo
