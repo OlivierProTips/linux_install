@@ -53,10 +53,14 @@ echo 'source $VIMRUNTIME/defaults.vim' >> /root/.vimrc
 echo 'set mouse-=a' >> /root/.vimrc
 
 # Add check disk size to cron
-crontab -u $user -l | { cat; echo "MAILTO=[MAIL]"; } | crontab -u $user -
-crontab -u $user -l | { cat; echo "MAILFROM=[MAIL]"; } | crontab -u $user -
-crontab -u $user -l | { cat; echo "# Check disk size"; } | crontab -u $user -
-crontab -u $user -l | { cat; echo "0 */6 * * * /home/$user/scripts/check_disk_size.sh"; } | crontab -u $user -
+crontab -u $user -l | { cat; \
+echo \
+echo "MAILTO=[MAIL]"; \
+echo "MAILFROM=[MAIL]"; \
+echo \
+echo "# Check disk size"; \
+echo "0 */6 * * * /home/$user/scripts/check_disk_size.sh"; \
+} | crontab -u $user -
 
 # Add alias
 echo "alias ll='ls -lah --color'" >> /home/$user/.bashrc
