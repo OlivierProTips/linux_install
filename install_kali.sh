@@ -16,7 +16,7 @@ fi
 # fi
 
 sudo DEBIAN_FRONTEND=noninteractive apt update
-sudo DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
+# sudo DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
 
 # VSCODE
 echo "=============================="
@@ -87,10 +87,11 @@ sudo mv nmaper.py /usr/local/bin/nmaper
 sudo chmod +x /usr/local/bin/nmaper
 
 # LESS
-echo "=============================="
-echo "Installing LESS"
-echo "=============================="
-sudo mv less.sh /usr/local/bin
+# echo "=============================="
+# echo "Installing LESS"
+# echo "=============================="
+# sudo mv less.sh /usr/local/bin
+# sudo chmod +x /usr/local/bin/less.sh
 
 # BURPSUITE
 if [[ ${arch} == "arm64" ]]
@@ -98,11 +99,10 @@ then
     echo "=============================="
     echo "Installing BURPSUITE"
     echo "=============================="
-    sudo mv burp* /usr/local/bin
-    sudo chmod +x /usr/local/bin/burp*
-    echo
-    echo "DO NOT FORGET TO DOWNLOAD BURPSUITE JAR AND INSTALL IT WITH burp_update"
-    echo
+    wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/burpsuite
+    sudo mv burpsuite /usr/local/bin
+    sudo chmod +x /usr/local/bin/burpsuite
+    sudo /usr/local/bin/burpsuite -u
 fi
 
 # VPNCHOICE
@@ -115,5 +115,11 @@ sudo chmod +x /usr/local/bin/vpnchoice
 echo "alias vpnchoice='sudo vpnchoice'" >> ~/.zshrc
 
 # MANUAL STEPS
-# Default application: Terminator
-# Synchronize VSCode
+echo " ------------------------------------- "
+echo "| MANUAL STEPS                        |"
+echo " ------------------------------------- "
+echo "| Set Default application: Terminator |"
+echo "| Synchronize VSCode                  |"
+echo "| Certificat burpsuite                |"
+echo "| FoxyProxy in Firefox                |"
+echo " ------------------------------------- "
