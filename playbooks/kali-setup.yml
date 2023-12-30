@@ -29,7 +29,7 @@
 
     - name: Debug variables
       debug:
-        msg: "arch: {{ arch.stdout }}"
+        msg: "arch: {{ arch }}"
 
     - name: Install vscode
       apt: 
