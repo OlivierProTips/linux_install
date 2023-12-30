@@ -92,6 +92,10 @@
         - "monip"
         - "nmaper"
         - "vpnchoice"
+    
+    - name: Install simple-term-menu
+      become: true
+      shell: python3 -m pip install simple-term-menu
 
     - name: Copy arm burpsuite script
       become: true
