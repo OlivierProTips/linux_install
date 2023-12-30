@@ -31,6 +31,8 @@
           - seclists
           - feroxbuster
           - gobuster
+          - python3-pip
+          - python3.11-venv
         state: present
 
     - name: Create terminator config folder
@@ -47,3 +49,17 @@
       become: true
       shell: gunzip -d /usr/share/wordlists/rockyou.txt.gz
       ignore_errors: yes
+
+    - name: Copy .zshrc
+      copy:
+        src: ".zshrc"
+        dest: "~/.zshrc"
+
+    - name: Install pipx
+      pip:
+        name: pipx
+        extra_args: "--user"
+
+    - name: Install pwncat-cs
+      pipx:
+        name: pwncat-cs
