@@ -78,10 +78,10 @@
       shell: gunzip -d /usr/share/wordlists/rockyou.txt.gz
       ignore_errors: yes
 
-    - name: Copy .zshrc
-      copy:
-        src: ".zshrc"
-        dest: "~/.zshrc"
+    # - name: Copy .zshrc
+    #   copy:
+    #     src: ".zshrc"
+    #     dest: "~/.zshrc"
 
     - name: Add pipx path
       lineinfile:
