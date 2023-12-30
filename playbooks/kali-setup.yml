@@ -10,11 +10,15 @@
         cache_valid_time: 86400 #One day
 
     - name: Download arm vscode
-      get_url: url=https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64 dest=/tmp/vscode.deb
+      get_url: 
+        url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64" 
+        dest: "/tmp/vscode.deb"
       when: ansible_architecture == 'aarch64' or ansible_architecture == 'arm64'
 
     - name: Download x64 vscode
-      get_url: url=https://code.visualstudio.com/sha/download?build=stable&os=x64 dest=/tmp/vscode.deb
+      get_url: 
+        url: "https://code.visualstudio.com/sha/download?build=stable&os=x64" 
+        dest: "/tmp/vscode.deb"
       when: ansible_architecture != 'aarch64' and ansible_architecture != 'arm64'
 
     - name: Install VSCode
@@ -87,3 +91,33 @@
         - "upload"
         - "monip"
         - "nmaper"
+        - "vpnchoice"
+
+    - name: Copy arm burpsuite script
+      become: true
+      copy:
+        src: "burpsuite"
+        dest: "/usr/local/bin/"
+        mode: "+x"
+      when: ansible_architecture == 'aarch64' or ansible_architecture == 'arm64'
+    
+    - name: Install arm burpsuite
+      become: true
+      shell: /usr/local/bin/burpsuite -u
+      when: ansible_architecture == 'aarch64' or ansible_architecture == 'arm64'
+
+    - name: Create Tools folder
+      file:
+        path: "~/Tools"
+        state: directory
+
+    - name: Get Tools script
+      get_url: 
+        url: "https://raw.githubusercontent.com/ThePorgs/Exegol-resources/main/update-resources.sh" 
+        dest: "~/Tools/"
+        mode: "+x"
+
+    - name: Install Tools
+      shell: |
+        cd ~/Tools/
+        ./update-resources.sh
