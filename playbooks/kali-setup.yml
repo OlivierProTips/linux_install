@@ -20,11 +20,6 @@
     - name: Get architecture
       shell: |
         archi=$(uname -m)
-        if [[ "${archi}" == "aarch64" || "${archi}" == "arm64" ]]; then
-            arch="arm64"
-        else
-            arch="x64"
-        fi
       register: arch
 
     - name: Debug variables
