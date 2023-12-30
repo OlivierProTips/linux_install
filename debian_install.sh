@@ -1,6 +1,9 @@
 #!/bin/bash
 # DRAFT
+# su -
+# apt install git
 # git clone -b dev https://github.com/olivierprotips/linux_install
+
 
 # Check if we are root
 if [ "$EUID" -ne 0 ]
