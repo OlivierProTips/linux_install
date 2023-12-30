@@ -74,14 +74,23 @@
         owner: "{{ debian_user }}"
         group: "{{ debian_user }}"
 
+    - name: Add mail variables in crontab
+      community.general.cronvar:
+        name: {{item.0}}
+        value: {{ debian_smtp_user }}
+        user: {{item.1}}
+      with_items:
+        - ['MAILTO', 'MAILFROM']
+        - [{{ debian_user }}, 'root']
+
     - name: change user passwords
-      ansible.builtin.user:
+      user:
         name: "{{ debian_user }}"
         state: present
         password: "{{ debian_user_password | password_hash('sha512') }}"
 
     - name: change root passwords
-      ansible.builtin.user:
+      user:
         name: "root"
         state: present
         password: "{{ debian_root_password | password_hash('sha512') }}"
