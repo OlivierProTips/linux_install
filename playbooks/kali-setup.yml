@@ -55,11 +55,11 @@
         src: ".zshrc"
         dest: "~/.zshrc"
 
+    - name: Add pipx path
+      lineinfile:
+        line: 'export PATH="$PATH:/home/kali/.local/bin"'
+
     - name: Install pwncat-cs
       shell: |
         python3 -m pip install --user pipx
         pipx install pwncat-cs
-
-    - name: Add pipx path
-      lineinfile:
-        line: 'export PATH="$PATH:/home/kali/.local/bin"'
