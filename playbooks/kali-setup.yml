@@ -9,6 +9,14 @@
         update_cache: yes
         cache_valid_time: 86400 #One day
 
+    - name: Get user name
+      shell: whoami
+      register: user_name
+
+    - name: Get user desktop folder
+      shell: xdg-user-dir DESKTOP
+      register: user_desktop
+
     - name: Download arm vscode
       get_url: 
         url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64" 
@@ -62,12 +70,12 @@
     - name: Add pipx path
       lineinfile:
         dest: "~/.zshrc"
-        line: 'export PATH="$PATH:/home/kali/.local/bin"'
+        line: 'export PATH="$PATH:/home/{{ user_name.stdout }}/.local/bin"'
 
     - name: Install pwncat-cs
       shell: |
         python3 -m pip install --user pipx
-        export PATH="$PATH:/home/kali/.local/bin"
+        export PATH="$PATH:/home/{{ user_name.stdout }}/.local/bin"
         pipx install pwncat-cs
 
     - name: Setting VIM
@@ -78,8 +86,8 @@
           source $VIMRUNTIME/defaults.vim
           set mouse-=a
       with_items:
-        - /home/kali/.vimrc
-        - /root/.vimrc
+        - "/home/{{ user_name.stdout }}/.vimrc"
+        - "/root/.vimrc"
 
     - name: Copy scripts
       become: true
@@ -130,3 +138,17 @@
       shell: |
         cd ~/Tools/
         ./update-resources.sh
+
+    - name: Get Virtual Env
+      shell: systemd-detect-virt | awk '{print tolower($0)}'
+      register: virt_env
+
+    - name: Install resizer
+      copy:
+        src: "{{ item }}"
+        dest: "{{ user_desktop.stdout }}"
+      with_items:
+        - "medium.sh"
+        - "high.sh"
+        - "auto.sh"
+      when: virt_env.stdout == qemu or virt_env.stdout == vmware
