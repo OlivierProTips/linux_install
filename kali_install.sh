@@ -38,6 +38,14 @@ listDisplay() {
     echo "$edge"
 }
 
+banner() {
+    msg="| $* |"
+    edge="+ $(echo "$*" | sed 's/./-/g') +"
+    echo "$edge"
+    echo "$msg"
+    echo "$edge"
+}
+
 # aarch64
 # 
 archi=$(uname -m)
@@ -57,9 +65,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt update
 # sudo DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
 
 # VSCODE
-echo "=============================="
-echo "Installing VSCODE ${archi}/${arch}"
-echo "=============================="
+banner "Installing VSCODE ${archi}/${arch}"
 wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-${arch}" -O /tmp/vscode.deb
 sudo apt install /tmp/vscode.deb
 rm -f /tmp/vscode.deb
@@ -75,41 +81,29 @@ rm -f /tmp/vscode.deb
 # code --install-extension jsynowiec.vscode-insertdatestring --force
 
 # TERMINATOR
-echo "=============================="
-echo "Installing TERMINATOR"
-echo "=============================="
+banner "Installing TERMINATOR"
 sudo apt install terminator -y
 mkdir -p ~/.config/terminator
 wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/Terminator/config -O ~/.config/terminator/config
 
 # ROCKYOU
-echo "=============================="
-echo "Installing ROCKYOU"
-echo "=============================="
+banner "Installing ROCKYOU"
 sudo gunzip -d /usr/share/wordlists/rockyou.txt.gz
 
 # SECLISTS
-echo "=============================="
-echo "Installing SECLISTS"
-echo "=============================="
+banner "Installing SECLISTS"
 sudo apt install seclists -y
 
 # FEROXBUSTER
-echo "=============================="
-echo "Installing FEROXBUSTER"
-echo "=============================="
+banner "Installing FEROXBUSTER"
 sudo apt install feroxbuster -y
 
 # GOBUSTER
-echo "=============================="
-echo "Installing GOBUSTER"
-echo "=============================="
+banner "Installing GOBUSTER"
 sudo apt install gobuster -y
 
 # PWNCAT-CS
-echo "=============================="
-echo "Installing PWNCAT-CS"
-echo "=============================="
+banner "Installing PWNCAT-CS"
 sudo DEBIAN_FRONTEND=noninteractive apt install python3.10-venv -y
 mkdir ~/Tools
 python3 -m venv ~/Tools/pwncat-env
@@ -119,73 +113,59 @@ deactivate
 echo "alias pwncatenv='source ~/Tools/pwncat-env/bin/activate'" >> ~/.zshrc
 
 # VIM
-echo "=============================="
-echo "Setting VIM"
-echo "=============================="
+banner "Setting VIM"
 echo 'source $VIMRUNTIME/defaults.vim' >> ~/.vimrc
 echo 'set mouse-=a' >> ~/.vimrc
 sudo echo 'source $VIMRUNTIME/defaults.vim' >> /root/.vimrc
 sudo echo 'set mouse-=a' >> /root/.vimrc
 
 # ZSH
-echo "=============================="
-echo "Setting ZSH"
-echo "=============================="
+banner "Setting ZSH"
 # mv .zshrc ~
 wget https://raw.githubusercontent.com/OlivierProTips/linux_install/master/.zshrc -O ~/.zshrc
 
 # UPLOAD
-echo "=============================="
-echo "Installing UPLOAD"
-echo "=============================="
+banner "Installing UPLOAD"
 sudo wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/upload_file_wget.sh -O /usr/local/bin/upload_file_wget
 sudo chmod +x /usr/local/bin/upload_file_wget
 
 # MONIP
-echo "=============================="
-echo "Installing MONIP"
-echo "=============================="
+banner "Installing MONIP"
 sudo wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/monip.sh -O /usr/local/bin/monip
 sudo chmod +x /usr/local/bin/monip
 
 # NMAPER
-echo "=============================="
-echo "Installing NMAPER"
-echo "=============================="
+banner "Installing NMAPER"
 sudo wget https://raw.githubusercontent.com/OlivierProTips/nmaper/master/nmaper.py -O /usr/local/bin/nmaper
 sudo chmod +x /usr/local/bin/nmaper
 
 # LESS
-# echo "=============================="
-# echo "Installing LESS"
-# echo "=============================="
+#
+# banner "Installing LESS"
+#
 # chmod +x less.sh
 # mv less.sh $(xdg-user-dir DESKTOP)
 
 # BURPSUITE
 if [[ ${arch} == "arm64" ]]
 then
-    echo "=============================="
-    echo "Installing BURPSUITE"
-    echo "=============================="
+
+    banner "Installing BURPSUITE"
+
     sudo wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/burpsuite -O /usr/local/bin/burpsuite
     sudo chmod +x /usr/local/bin/burpsuite
     sudo /usr/local/bin/burpsuite -u
 fi
 
 # VPNCHOICE
-echo "=============================="
-echo "Installing VPNCHOICE"
-echo "=============================="
+banner "Installing VPNCHOICE"
 sudo wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/vpnchoice.py -O /usr/local/bin/vpnchoice
 sudo chmod +x /usr/local/bin/vpnchoice
 echo "alias vpnchoice='sudo vpnchoice'" >> ~/.zshrc
 sudo python3 -m pip install simple-term-menu
 
 # TOOLS
-echo "=============================="
-echo "Installing TOOLS"
-echo "=============================="
+banner "Installing TOOLS"
 # echo '#!/bin/bash' > ~/Tools/update_tools.sh
 # echo 'wget https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php -O ~/Tools/rev.php' >> ~/Tools/update_tools.sh
 # echo 'wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh -O ~/Tools/linpeas.sh' >> ~/Tools/update_tools.sh
@@ -202,9 +182,9 @@ cd ${currentDir}
 # RESIZER
 if [[ "$(systemd-detect-virt | awk '{print tolower($0)}')" =~ (qemu|vmware) ]]
 then
-    echo "=============================="
-    echo "Installing RESIZER on UTM"
-    echo "=============================="
+
+    banner "Installing RESIZER on UTM"
+
     echo 'xrandr -s 1280x768' > $(xdg-user-dir DESKTOP)/medium.sh
     echo 'xrandr -s 1920x1080' > $(xdg-user-dir DESKTOP)/high.sh
     echo 'xrandr --output Virtual-1 --auto' > $(xdg-user-dir DESKTOP)/auto.sh
@@ -212,9 +192,7 @@ then
 fi
 
 # TOOLS
-echo "=============================="
-echo "Installing DNSMASQ"
-echo "=============================="
+banner "Installing DNSMASQ"
 wget -O - https://raw.githubusercontent.com/OlivierProTips/linux_install/master/dnsmasq_install.sh | bash
 
 # MANUAL STEPS
