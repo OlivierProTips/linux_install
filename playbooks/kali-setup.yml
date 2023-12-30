@@ -61,5 +61,5 @@
         extra_args: "--user"
 
     - name: Install pwncat-cs
-      pipx:
+      community.general.pipx:
         name: pwncat-cs
