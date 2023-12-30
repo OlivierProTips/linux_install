@@ -66,7 +66,10 @@ sudo pip install pwncat-cs
 echo "=============================="
 echo "Setting VIM"
 echo "=============================="
-mv .vimrc ~
+echo 'source $VIMRUNTIME/defaults.vim' >> ~/.vimrc
+echo 'set mouse-=a' >> ~/.vimrc
+sudo echo 'source $VIMRUNTIME/defaults.vim' >> /root/.vimrc
+sudo echo 'set mouse-=a' >> /root/.vimrc
 
 # ZSH
 echo "=============================="
