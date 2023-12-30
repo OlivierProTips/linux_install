@@ -92,13 +92,13 @@ echo 'set mouse-=a' >> /root/.vimrc
 crontab -u $user -l | { cat; echo; echo "MAILTO=[MAIL]"; } | crontab -u $user -
 crontab -u $user -l | { cat; echo "MAILFROM=[MAIL]"; } | crontab -u $user -
 crontab -u $user -l | { cat; echo; echo "# Check disk size"; } | crontab -u $user -
-crontab -u $user -l | { cat; echo "0 */1 * * * /home/$user/scripts/check_disk_size.sh"; } | crontab -u $user -
+crontab -u $user -l | { cat; echo "0 */1 * * * /home/$user/scripts/check_disk_size.sh | mail -E -s \"[CRON][\$(hostname | tr a-z A-Z)] Low disk space\" \$MAILTO > /dev/null"; } | crontab -u $user -
 
 # Add apt check to root cron
 crontab -l | { cat; echo; echo "MAILTO=[MAIL]"; } | crontab -
 crontab -l | { cat; echo "MAILFROM=[MAIL]"; } | crontab -
 crontab -l | { cat; echo; echo "# Check if server can be updated"; } | crontab -
-crontab -l | { cat; echo "0 12 * * * /root/scripts/aptcheck.sh"; } | crontab -
+crontab -l | { cat; echo "0 12 * * * /root/scripts/aptcheck.sh | mail -E -s \"[CRON][\$(hostname | tr a-z A-Z)] Update available\" \$MAILTO > /dev/null"; } | crontab -
 
 # Add alias
 echo "alias ll='ls -lah --color'" >> /home/$user/.bashrc
