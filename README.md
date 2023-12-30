@@ -52,6 +52,7 @@ This script will set up my environment from a fresh debian installation.
 ```bash
 git clone https://github.com/olivierprotips/linux_install
 cd linux_install
+vi data
 ./debian_install.sh
 ```
 
@@ -68,3 +69,4 @@ It will install the following:
 - Add vim config (allow to select text with mouse)
 - My check disk size script (+ crontab)
 - My ll alias in .zshrc
+- Set unattended update
