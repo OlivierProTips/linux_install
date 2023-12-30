@@ -109,7 +109,7 @@ fi
 echo "=============================="
 echo "Installing VPNCHOICE"
 echo "=============================="
-wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/blob/main/scripts/vpnchoice.py
+wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/vpnchoice.py
 sudo mv vpnchoice.py /usr/local/bin/vpnchoice
 sudo chmod +x /usr/local/bin/vpnchoice
 echo "alias vpnchoice='sudo vpnchoice'" >> ~/.zshrc
