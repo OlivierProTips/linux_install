@@ -15,6 +15,8 @@ fi
 #     exit
 # fi
 
+cd
+
 sudo DEBIAN_FRONTEND=noninteractive apt update
 # sudo DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
 
@@ -72,7 +74,14 @@ sudo apt install gobuster -y
 echo "=============================="
 echo "Installing PWNCAT-CS"
 echo "=============================="
-sudo pip install pwncat-cs
+sudo DEBIAN_FRONTEND=noninteractive apt install python3.10-venv -y
+mkdir Tools
+cd Tools
+python3 -m venv pwncat-env
+source ./pwncat-env/bin/activate
+pip install pwncat-cs
+deactivate
+cd
 
 # VIM
 echo "=============================="
