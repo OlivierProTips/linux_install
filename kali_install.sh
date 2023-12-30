@@ -102,6 +102,11 @@ sudo apt install feroxbuster -y
 banner "Installing GOBUSTER"
 sudo apt install gobuster -y
 
+# ZSH
+banner "Setting ZSH"
+# mv .zshrc ~
+wget https://raw.githubusercontent.com/OlivierProTips/linux_install/master/.zshrc -O ~/.zshrc
+
 # PWNCAT-CS
 banner "Installing PWNCAT-CS"
 sudo DEBIAN_FRONTEND=noninteractive apt install python3-pip python3.11-venv -y
@@ -110,18 +115,12 @@ python3 -m pipx ensurepath
 export PATH="$PATH:/home/kali/.local/bin"
 pipx install pwncat-cs
 
-
 # VIM
 banner "Setting VIM"
 echo 'source $VIMRUNTIME/defaults.vim' >> ~/.vimrc
 echo 'set mouse-=a' >> ~/.vimrc
 echo 'source $VIMRUNTIME/defaults.vim' | sudo tee -a /root/.vimrc > /dev/null
 echo 'set mouse-=a' | sudo tee -a /root/.vimrc > /dev/null
-
-# ZSH
-banner "Setting ZSH"
-# mv .zshrc ~
-wget https://raw.githubusercontent.com/OlivierProTips/linux_install/master/.zshrc -O ~/.zshrc
 
 # UPLOAD
 banner "Installing UPLOAD"
