@@ -65,7 +65,7 @@ DEBIAN_FRONTEND=noninteractive apt update
 
 # Install packages
 banner "Install packages"
-apt install git vim htop sudo wget nfs-common -y
+apt install git vim htop sudo wget nfs-common ncdu -y
 
 banner "Install msmtp-mta bsd-mailx"
 apt install msmtp-mta bsd-mailx -y
@@ -96,12 +96,12 @@ chmod +x /home/$user/scripts/check_disk_size.sh
 # Add user to sudoers
 adduser $user sudo
 
-# Configure VIM for user and root
+# VIM
 banner "Setting VIM"
-echo 'source $VIMRUNTIME/defaults.vim' >> /home/$user/.vimrc
-echo 'set mouse-=a' >> /home/$user/.vimrc
-echo 'source $VIMRUNTIME/defaults.vim' >> /root/.vimrc
-echo 'set mouse-=a' >> /root/.vimrc
+echo 'source $VIMRUNTIME/defaults.vim' >> ~/.vimrc
+echo 'set mouse-=a' >> ~/.vimrc
+echo 'source $VIMRUNTIME/defaults.vim' | sudo tee -a /root/.vimrc > /dev/null
+echo 'set mouse-=a' | sudo tee -a /root/.vimrc > /dev/null
 
 # Add check disk size to user cron
 crontab -u $user -l | { cat; echo; echo "MAILTO=$MAILTO"; } | crontab -u $user -
