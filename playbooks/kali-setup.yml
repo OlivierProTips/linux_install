@@ -32,8 +32,7 @@
           - feroxbuster
           - gobuster
           - python3-pip
-          - python3-venv
-          - python3-setuptools
+          - python3.11-venv
         state: present
 
     - name: Create terminator config folder
@@ -56,11 +55,9 @@
         src: ".zshrc"
         dest: "~/.zshrc"
 
-    - name: Install pipx
-      pip:
-        name: pipx
-        extra_args: "--user"
-
     - name: Install pwncat-cs
-      community.general.pipx:
-        name: pwncat-cs
+      shell: |
+        python3 -m pip install --user pipx
+        python3 -m pipx ensurepath
+        export PATH="$PATH:/home/kali/.local/bin"
+        pipx install pwncat-cs
