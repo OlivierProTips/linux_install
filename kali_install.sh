@@ -62,7 +62,7 @@ fi
 # fi
 
 sudo DEBIAN_FRONTEND=noninteractive apt update
-# sudo DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
+sudo DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
 
 # VSCODE
 banner "Installing VSCODE ${archi}/${arch}"
@@ -105,13 +105,11 @@ sudo apt install gobuster -y
 # PWNCAT-CS
 banner "Installing PWNCAT-CS"
 sudo DEBIAN_FRONTEND=noninteractive apt install python3-pip -y
-sudo pip install virtualenv
-mkdir ~/Tools
-virtualenv ~/Tools/pwncat-env
-source ~/Tools/pwncat-env/bin/activate
-pip install pwncat-cs
-deactivate
-echo "alias pwncatenv='source ~/Tools/pwncat-env/bin/activate'" >> ~/.zshrc
+python3 -m pip install --user pipx
+python3 -m pipx ensurepath
+export PATH=/home/kali/.local/bin:$PATH
+pipx install pwncat-cs
+
 
 # VIM
 banner "Setting VIM"
@@ -167,6 +165,7 @@ sudo python3 -m pip install simple-term-menu
 
 # TOOLS
 banner "Installing TOOLS"
+mkdir ~/Tools
 # echo '#!/bin/bash' > ~/Tools/update_tools.sh
 # echo 'wget https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php -O ~/Tools/rev.php' >> ~/Tools/update_tools.sh
 # echo 'wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh -O ~/Tools/linpeas.sh' >> ~/Tools/update_tools.sh
