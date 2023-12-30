@@ -65,33 +65,18 @@ DEBIAN_FRONTEND=noninteractive apt update
 
 # Install packages
 banner "Install packages"
-apt install git vim htop sudo wget nfs-common ncdu-y
+apt install git vim htop sudo wget nfs-common ncdu autofs -y
 
 banner "Install msmtp-mta bsd-mailx"
 apt install msmtp-mta bsd-mailx -y
 
-banner "Install unattended-upgrades apt-listchanges"
-apt install unattended-upgrades apt-listchanges -y
-
 # Copy msmtp config
-# cp .msmtprc /home/$user
-# chmod 600 /home/$user/.msmtprc
 cp msmtprc /etc/msmtprc
 chmod 644 /etc/msmtprc
 sed -i "/from/s/ .*/ $MAILFROM/" /etc/msmtprc
 sed -i "/user/s/ .*/ $MAILFROM/" /etc/msmtprc
 sed -i "/password/s/ .*/ $MAILPASSWORD/" /etc/msmtprc
 sed -i "/host/s/ .*/ $MAILHOST/" /etc/msmtprc
-
-# Get check_disk_size.sh
-mkdir /home/$user/scripts
-wget https://gist.githubusercontent.com/OlivierProTips/ceb4e778e44a27a7739db008f6b2488d/raw/check_disk_size.sh -O /home/$user/scripts/check_disk_size.sh
-chmod +x /home/$user/scripts/check_disk_size.sh
-
-# Get aptcheck.sh
-# mkdir /root/scripts
-# wget https://gist.githubusercontent.com/OlivierProTips/7143d92877d1871e1367ff98e6905402/raw/aptcheck.sh -O /root/scripts/aptcheck.sh
-# chmod u+x /root/scripts/aptcheck.sh
 
 # Add user to sudoers
 adduser $user sudo
@@ -103,18 +88,6 @@ echo 'set mouse-=a' >> ~/.vimrc
 echo 'source $VIMRUNTIME/defaults.vim' | sudo tee -a /root/.vimrc > /dev/null
 echo 'set mouse-=a' | sudo tee -a /root/.vimrc > /dev/null
 
-# Add check disk size to user cron
-crontab -u $user -l | { cat; echo; echo "MAILTO=$MAILTO"; } | crontab -u $user -
-crontab -u $user -l | { cat; echo "MAILFROM=$MAILFROM"; } | crontab -u $user -
-crontab -u $user -l | { cat; echo; echo "# Check disk size"; } | crontab -u $user -
-crontab -u $user -l | { cat; echo "0 */1 * * * /home/$user/scripts/check_disk_size.sh | mail -E -s \"[CRON][\$(hostname | tr a-z A-Z)] Low disk space\" \$MAILTO > /dev/null"; } | crontab -u $user -
-
-# Add apt check to root cron
-# crontab -l | { cat; echo; echo "MAILTO=$MAILTO"; } | crontab -
-# crontab -l | { cat; echo "MAILFROM=$MAILFROM"; } | crontab -
-# crontab -l | { cat; echo; echo "# Check if server can be updated"; } | crontab -
-# crontab -l | { cat; echo "0 12 * * * /root/scripts/aptcheck.sh | mail -E -s \"[CRON][\$(hostname | tr a-z A-Z)] Update available\" \$MAILTO > /dev/null"; } | crontab -
-
 # Add alias
 echo "alias ll='ls -lah --color'" >> /home/$user/.bashrc
 echo "alias ll='ls -lah --color'" >> /root/.bashrc
@@ -122,21 +95,13 @@ echo "alias ll='ls -lah --color'" >> /root/.bashrc
 # Chown all user folder
 chown -R $user:$user /home/$user
 
-# Configure unattended
-cp /usr/share/unattended-upgrades/20auto-upgrades /etc/apt/apt.conf.d/20auto-upgrades
-sed -i '/origin=Debian,codename=\${distro_codename}-updates/s/\/\///g' /etc/apt/apt.conf.d/50unattended-upgrades
-sed -i '/Unattended-Upgrade::SyslogEnable/s/\/\///g' /etc/apt/apt.conf.d/50unattended-upgrades
-sed -i '/Unattended-Upgrade::Mail/s/\/\///' /etc/apt/apt.conf.d/50unattended-upgrades
-sed -i "/Unattended-Upgrade::Mail /s/\"\"/\"$MAILTO\"/" /etc/apt/apt.conf.d/50unattended-upgrades
-sed -i "/email_address=/s/=.*/=$MAILTO/" /etc/apt/listchanges.conf
-
 # MANUAL STEPS
 myTasks=(
     "Check mail in"
     "  crontab (root and $user)"
     "  /etc/msmtprc"
-    "  /etc/apt/listchanges.conf"
-    "  /etc/apt/apt.conf.d/50unattended-upgrades"
+    # "  /etc/apt/listchanges.conf"
+    # "  /etc/apt/apt.conf.d/50unattended-upgrades"
 )
 listDisplay "MANUAL STEPS"
 
