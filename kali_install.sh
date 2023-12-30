@@ -168,7 +168,7 @@ chmod +x ~/Tools/update_tools.sh
 ~/Tools/update_tools.sh
 
 # RESIZER
-if [[ "$(systemd-detect-virt | awk '{print tolower($0)}')" == "qemu" ]]
+if [[ "$(systemd-detect-virt | awk '{print tolower($0)}')" =~ (qemu|vmware) ]]
 then
     echo "=============================="
     echo "Installing RESIZER on UTM"
