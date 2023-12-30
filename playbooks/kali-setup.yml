@@ -60,6 +60,7 @@
           - python3-pip
           - python3.11-venv
           - burpsuite
+          - golang-go
         state: present
 
     - name: Create terminator config folder
@@ -164,3 +165,10 @@
         - "high.sh"
         - "auto.sh"
       when: virt_env.stdout == "qemu" or virt_env.stdout == "vmware"
+
+    - name: Install ligolo-ng
+      become: true
+      shell: |
+        sudo git clone https://github.com/nicocha30/ligolo-ng /opt/ligolo-ng
+        sudo go build -o agent /opt/ligolo-ng/cmd/agent/main.go
+        sudo go build -o proxy /opt/ligolo-ng/cmd/proxy/main.go
