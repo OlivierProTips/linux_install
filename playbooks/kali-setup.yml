@@ -62,4 +62,5 @@
     - name: Install pwncat-cs
       shell: |
         python3 -m pip install --user pipx
+        export PATH="$PATH:/home/kali/.local/bin"
         pipx install pwncat-cs
