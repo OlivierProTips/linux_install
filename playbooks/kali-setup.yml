@@ -157,6 +157,10 @@
     - name: Install simple-term-menu
       become: true
       shell: python3 -m pip install simple-term-menu
+    
+    - name: Install updog
+      become: true
+      shell: python3 -m pip install updog
 
     # - name: Copy arm burpsuite script
     #   become: true
