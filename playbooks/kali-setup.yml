@@ -21,15 +21,22 @@
       shell: |
         archi=$(uname -m)
         if [[ "${archi}" == "aarch64" || "${archi}" == "arm64" ]]; then
-            echo "arm64"
+            arch="arm64"
         else
-            echo "x64"
+            arch="x64"
         fi
-      register: archi
+      register: arch
+
+    - name: Debug variables
+      debug:
+        msg: |
+          user_name: {{ user_name.stdout }}
+          user_desktop: {{ user_desktop.stdout }}
+          arch: {{ arch }}
 
     - name: Install vscode
       apt: 
-        deb: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-{{ archi.stdout }}" 
+        deb: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-{{ arch }}" 
 
     - name: Install VSCode
       become: true
