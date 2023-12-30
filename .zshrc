@@ -211,6 +211,6 @@ fi
 
 alias ll='ls --color=always -hla'
 alias h='history'
-export WPTOKEN="sp5LfkrHMusAF5wlZhElVEIqBkwyF4jBLXN74DHXfs0"
 alias openport="awk -F/ '/open/{print \$1}{ORS=\",\"}'"
+alias vpnchoice="sudo vpnchoice"
 
