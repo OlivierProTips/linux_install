@@ -157,7 +157,7 @@
       copy:
         src: "{{ item }}"
         dest: "{{ user_desktop.stdout }}"
-      mode: "+x"
+        mode: "+x"
       with_items:
         - "medium.sh"
         - "high.sh"
