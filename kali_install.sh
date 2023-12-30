@@ -60,8 +60,9 @@ sudo DEBIAN_FRONTEND=noninteractive apt update
 echo "=============================="
 echo "Installing VSCODE ${archi}/${arch}"
 echo "=============================="
-wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-${arch}" -O vscode.deb
-sudo apt install ./vscode.deb
+wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-${arch}" -O /tmp/vscode.deb
+sudo apt install /tmp/vscode.deb
+rm -f /tmp/vscode.deb
 
 # code --install-extension donjayamanne.python-extension-pack --force
 # code --install-extension donjayamanne.git-extension-pack --force
@@ -78,9 +79,8 @@ echo "=============================="
 echo "Installing TERMINATOR"
 echo "=============================="
 sudo apt install terminator -y
-wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/Terminator/config
 mkdir -p ~/.config/terminator
-mv config ~/.config/terminator/config
+wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/Terminator/config -O ~/.config/terminator/config
 
 # ROCKYOU
 echo "=============================="
@@ -131,38 +131,36 @@ sudo echo 'set mouse-=a' >> /root/.vimrc
 echo "=============================="
 echo "Setting ZSH"
 echo "=============================="
-mv .zshrc ~
+# mv .zshrc ~
+wget https://raw.githubusercontent.com/OlivierProTips/linux_install/master/.zshrc -O ~/.zshrc
 
 # UPLOAD
 echo "=============================="
 echo "Installing UPLOAD"
 echo "=============================="
-wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/upload_file_wget.sh
-sudo mv upload_file_wget.sh /usr/local/bin/upload_file_wget
+sudo wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/upload_file_wget.sh -O /usr/local/bin/upload_file_wget
 sudo chmod +x /usr/local/bin/upload_file_wget
 
 # MONIP
 echo "=============================="
 echo "Installing MONIP"
 echo "=============================="
-wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/monip.sh
-sudo mv monip.sh /usr/local/bin/monip
+sudo wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/monip.sh -O /usr/local/bin/monip
 sudo chmod +x /usr/local/bin/monip
 
 # NMAPER
 echo "=============================="
 echo "Installing NMAPER"
 echo "=============================="
-wget https://raw.githubusercontent.com/OlivierProTips/nmaper/master/nmaper.py
-sudo mv nmaper.py /usr/local/bin/nmaper
+sudo wget https://raw.githubusercontent.com/OlivierProTips/nmaper/master/nmaper.py -O /usr/local/bin/nmaper
 sudo chmod +x /usr/local/bin/nmaper
 
 # LESS
-echo "=============================="
-echo "Installing LESS"
-echo "=============================="
-chmod +x less.sh
-mv less.sh $(xdg-user-dir DESKTOP)
+# echo "=============================="
+# echo "Installing LESS"
+# echo "=============================="
+# chmod +x less.sh
+# mv less.sh $(xdg-user-dir DESKTOP)
 
 # BURPSUITE
 if [[ ${arch} == "arm64" ]]
@@ -170,8 +168,7 @@ then
     echo "=============================="
     echo "Installing BURPSUITE"
     echo "=============================="
-    wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/burpsuite
-    sudo mv burpsuite /usr/local/bin
+    sudo wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/burpsuite -O /usr/local/bin/burpsuite
     sudo chmod +x /usr/local/bin/burpsuite
     sudo /usr/local/bin/burpsuite -u
 fi
@@ -180,8 +177,7 @@ fi
 echo "=============================="
 echo "Installing VPNCHOICE"
 echo "=============================="
-wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/vpnchoice.py
-sudo mv vpnchoice.py /usr/local/bin/vpnchoice
+sudo wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/vpnchoice.py -O /usr/local/bin/vpnchoice
 sudo chmod +x /usr/local/bin/vpnchoice
 echo "alias vpnchoice='sudo vpnchoice'" >> ~/.zshrc
 sudo python3 -m pip install simple-term-menu
@@ -219,7 +215,7 @@ fi
 echo "=============================="
 echo "Installing DNSMASQ"
 echo "=============================="
-./dnsmasq_install.sh
+wget -O - https://raw.githubusercontent.com/OlivierProTips/linux_install/master/dnsmasq_install.sh | bash
 
 # MANUAL STEPS
 myTasks=(
