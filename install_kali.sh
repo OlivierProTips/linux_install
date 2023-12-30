@@ -77,13 +77,6 @@ wget https://raw.githubusercontent.com/OlivierProTips/nmaper/master/nmaper.py
 sudo mv nmaper.py /usr/local/bin/nmaper
 sudo chmod +x /usr/local/bin/nmaper
 
-# ip_widget
-echo "=============================="
-echo "Installing ip_widget"
-echo "=============================="
-wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/ip_widget.sh
-sudo mv ip_widget.sh /usr/local/bin
-
 # LESS
 echo "=============================="
 echo "Installing LESS"
