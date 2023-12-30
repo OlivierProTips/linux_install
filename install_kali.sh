@@ -6,10 +6,6 @@ then
     exit
 fi
 
-cd /tmp
-mkdir -p kali_install
-cd kali_install
-
 sudo apt update
 
 # VSCODE
@@ -22,9 +18,9 @@ sudo add-apt-repository "deb [arch=${1,,}] https://packages.microsoft.com/repos/
 sudo apt update
 sudo apt install code -y
 
-code --install-extension donjayamanne.python-extension-pack --force
-code --install-extension donjayamanne.git-extension-pack --force
-code --install-extension ms-vscode.sublime-keybindings --force
+# code --install-extension donjayamanne.python-extension-pack --force
+# code --install-extension donjayamanne.git-extension-pack --force
+# code --install-extension ms-vscode.sublime-keybindings --force
 
 # TERMINATOR
 echo "=============================="
@@ -72,3 +68,17 @@ wget https://raw.githubusercontent.com/OlivierProTips/nmaper/master/nmaper.py
 sudo mv nmaper.py /usr/local/bin
 sudo chmod +x /usr/local/bin/nmaper.py
 sudo ln -s /usr/local/bin/nmaper.py /usr/local/bin/nmaper
+
+# LESS
+echo "=============================="
+echo "Installing LESS"
+echo "=============================="
+if [[ -d ~/Desktop ]]
+then
+    mv less.sh ~/Desktop
+elif [[ -d ~/Bureau ]]
+then
+    mv less.sh ~/Bureau
+else
+    echo "less.sh has not been moved"
+fi
