@@ -62,8 +62,6 @@ echo "alias ll='ls -lah --color'" >> /home/$user/.bashrc
 echo " ------------------------------------- "
 echo "| MANUAL STEPS                        |"
 echo " ------------------------------------- "
-echo "| Check apt edit-sources              |"
-echo "|   http://deb.debian.org/            |"
 echo "| Fill .msmtprc file                  |"
 echo " ------------------------------------- "
 
