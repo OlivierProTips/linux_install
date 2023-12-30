@@ -41,6 +41,12 @@ wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/Terminator/
 mkdir -p ~/.config/terminator
 mv config ~/.config/terminator/config
 
+# PWNCAT-CS
+echo "=============================="
+echo "Installing PWNCAT-CS"
+echo "=============================="
+sudo pip install pwncat-cs
+
 # VIM
 echo "=============================="
 echo "Setting VIM"
@@ -92,3 +98,26 @@ sudo chmod +x /usr/local/bin/burp*
 echo
 echo "DO NOT FORGET TO DOWNLOAD BURPSUITE JAR AND INSTALL IT WITH burp_update"
 echo
+
+# VPNCHOICE
+echo "=============================="
+echo "Installing VPNCHOICE"
+echo "=============================="
+wget https://github.com/OlivierProTips/HackNotes/blob/main/scripts/vpnchoice.py
+sudo mv vpnchoice.py /usr/local/bin/vpnchoice
+sudo chmod +x /usr/local/bin/vpnchoice
+echo "alias vpnchoice='sudo vpnchoice'" >> ~/.zshrc
+
+# VSCODE
+echo "=============================="
+echo "Installing VSCODE"
+echo "=============================="
+echo
+echo "BEFORE CONTINUING"
+echo "Download VSCode from https://code.visualstudio.com/download"
+echo "and INSTALL it: sudo dpkg -i <vscode.pkg>"
+echo
+read -p "Press any key to continue ..."
+code --install-extension donjayamanne.python-extension-pack --force
+code --install-extension donjayamanne.git-extension-pack --force
+code --install-extension ms-vscode.sublime-keybindings --force
