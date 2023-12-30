@@ -32,7 +32,7 @@
           - feroxbuster
           - gobuster
           - python3-pip
-          - python3-virtualenv
+          - python3-venv
           - python3-setuptools
         state: present
 
