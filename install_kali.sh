@@ -122,12 +122,8 @@ sudo chmod +x /usr/local/bin/nmaper
 echo "=============================="
 echo "Installing LESS"
 echo "=============================="
-mv less.sh ~
-chmod +x ~/less.sh
-if [[ -d ~/Desktop ]]
-then
-    mv ~/less.sh ~/Desktop
-fi
+chmod +x less.sh
+mv less.sh $(xdg-user-dir DESKTOP)
 
 # BURPSUITE
 if [[ ${arch} == "arm64" ]]
@@ -163,14 +159,24 @@ echo 'wget https://github.com/DominicBreuker/pspy/releases/latest/download/pspy3
 chmod +x ~/Tools/update_tools.sh
 ~/Tools/update_tools.sh
 
+# RESIZER
+echo "=============================="
+echo "Installing RESIZER on UTM"
+echo "=============================="
+if [[ "$(systemd-detect-virt | awk '{print tolower($0)}')" == "qemu" ]]
+then
+    echo 'xrandr -s 1280x768' > $(xdg-user-dir DESKTOP)/medium.sh
+    echo 'xrandr -s 1920x1080' > $(xdg-user-dir DESKTOP)/high.sh
+    echo 'xrandr --output Virtual-1 --auto' > $(xdg-user-dir DESKTOP)/auto.sh
+    chmod +x $(xdg-user-dir DESKTOP)/*.sh
+fi
+
 # MANUAL STEPS
 echo " ------------------------------------- "
 echo "| MANUAL STEPS                        |"
 echo " ------------------------------------- "
 echo "| Set Default application: Terminator |"
 echo "| Synchronize VSCode                  |"
-echo "| Certificat burpsuite                |"
-echo "| FoxyProxy in Firefox                |"
-echo "| HackTools in Firefox                |"
-echo "| browser.urlbar.trimURLs in Firefox  |"
+echo "| Synchronize Firefox                 |"
+echo "| Set time if needed                  |"
 echo " ------------------------------------- "
