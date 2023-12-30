@@ -1,12 +1,22 @@
 #!/bin/bash
 
-if [[ -z $1 || ($1 != "ARM64" && $1 != "AMD64") ]]
-then
-    echo "Use AMD64 or ARM64 as parameter"
-    exit
+# aarch64
+# 
+archi=$(uname -m)
+if [[ "${archi}" == "aarch64" || "${archi}" == "arm64" ]]; then
+    arch="arm64"
+else
+    arch="amd64"
 fi
 
-sudo apt update
+# if [[ -z $1 || ($1 != "ARM64" && $1 != "AMD64") ]]
+# then
+#     echo "Use AMD64 or ARM64 as parameter"
+#     exit
+# fi
+
+sudo DEBIAN_FRONTEND=noninteractive apt update
+sudo DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
 
 # VSCODE
 echo "=============================="
@@ -14,7 +24,7 @@ echo "Installing VSCODE"
 echo "=============================="
 sudo apt install software-properties-common apt-transport-https wget -y
 wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=${1,,}] https://packages.microsoft.com/repos/vscode stable main"
+sudo add-apt-repository "deb [arch=${arch,,}] https://packages.microsoft.com/repos/vscode stable main"
 sudo apt update
 sudo apt install code -y
 
