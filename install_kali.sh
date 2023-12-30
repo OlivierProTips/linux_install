@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Launch script as root
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 # aarch64
 # 
 archi=$(uname -m)
@@ -15,18 +21,19 @@ fi
 #     exit
 # fi
 
-sudo DEBIAN_FRONTEND=noninteractive apt update
-sudo DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
+export DEBIAN_FRONTEND=noninteractive
+
+apt update && apt dist-upgrade -y
 
 # VSCODE
 echo "=============================="
 echo "Installing VSCODE"
 echo "=============================="
-sudo apt install software-properties-common apt-transport-https wget -y
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=${arch,,}] https://packages.microsoft.com/repos/vscode stable main"
-sudo apt update
-sudo apt install code -y
+apt install software-properties-common apt-transport-https wget -y
+wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | apt-key add -
+add-apt-repository "deb [arch=${arch,,}] https://packages.microsoft.com/repos/vscode stable main"
+apt update
+apt install code -y
 
 # code --install-extension donjayamanne.python-extension-pack --force
 # code --install-extension donjayamanne.git-extension-pack --force
@@ -36,7 +43,7 @@ sudo apt install code -y
 echo "=============================="
 echo "Installing TERMINATOR"
 echo "=============================="
-sudo apt install terminator -y
+apt install terminator -y
 wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/Terminator/config
 mkdir -p ~/.config/terminator
 mv config ~/.config/terminator/config
@@ -58,26 +65,33 @@ echo "=============================="
 echo "Installing UPLOAD"
 echo "=============================="
 wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/upload_file_wget.sh
-sudo mv upload_file_wget.sh /usr/local/bin
-sudo chmod +x /usr/local/bin/upload_file_wget.sh
+mv upload_file_wget.sh /usr/local/bin
+chmod +x /usr/local/bin/upload_file_wget.sh
 
 # MONIP
 echo "=============================="
 echo "Installing MONIP"
 echo "=============================="
 wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/monip.sh
-sudo mv monip.sh /usr/local/bin
-sudo chmod +x /usr/local/bin/monip.sh
-sudo ln -s /usr/local/bin/monip.sh /usr/local/bin/monip
+mv monip.sh /usr/local/bin
+chmod +x /usr/local/bin/monip.sh
+ln -s /usr/local/bin/monip.sh /usr/local/bin/monip
 
 # NMAPER
 echo "=============================="
 echo "Installing NMAPER"
 echo "=============================="
 wget https://raw.githubusercontent.com/OlivierProTips/nmaper/master/nmaper.py
-sudo mv nmaper.py /usr/local/bin
-sudo chmod +x /usr/local/bin/nmaper.py
-sudo ln -s /usr/local/bin/nmaper.py /usr/local/bin/nmaper
+mv nmaper.py /usr/local/bin
+chmod +x /usr/local/bin/nmaper.py
+ln -s /usr/local/bin/nmaper.py /usr/local/bin/nmaper
+
+# ip_widget
+echo "=============================="
+echo "Installing ip_widget"
+echo "=============================="
+wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/ip_widget.sh
+mv ip_widget.sh ~/Documents
 
 # LESS
 echo "=============================="
