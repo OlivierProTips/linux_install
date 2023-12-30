@@ -151,4 +151,4 @@
         - "medium.sh"
         - "high.sh"
         - "auto.sh"
-      when: virt_env.stdout == qemu or virt_env.stdout == vmware
+      when: virt_env.stdout == "qemu" or virt_env.stdout == "vmware"
