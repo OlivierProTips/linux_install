@@ -32,7 +32,8 @@
           - feroxbuster
           - gobuster
           - python3-pip
-          - python3.11-venv
+          - python3-virtualenv
+          - python3-setuptools
         state: present
 
     - name: Create terminator config folder
