@@ -64,4 +64,4 @@ echo "|   http://deb.debian.org/            |"
 echo "| Fill .msmtprc file                  |"
 echo " ------------------------------------- "
 
-reboot
+# reboot
