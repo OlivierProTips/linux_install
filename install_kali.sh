@@ -114,13 +114,20 @@ echo "Installing VSCODE"
 echo "=============================="
 echo
 echo "BEFORE CONTINUING"
-echo "Download VSCode from https://code.visualstudio.com/download"
-echo "and INSTALL it: sudo dpkg -i <vscode.pkg>"
+echo "Download VSCode from https://code.visualstudio.com/download "
+echo "and INSTALL it: sudo dpkg -i <vscode.deb>"
 echo
 read -p "Press any key to continue ..."
-code --install-extension donjayamanne.python-extension-pack --force
-code --install-extension donjayamanne.git-extension-pack --force
-code --install-extension ms-vscode.sublime-keybindings --force
+# code --install-extension donjayamanne.python-extension-pack --force
+# code --install-extension donjayamanne.git-extension-pack --force
+# code --install-extension ms-vscode.sublime-keybindings --force
+# code --install-extension mechatroner.rainbow-csv --force
+# code --install-extension netcorext.uuid-generator --force
+# code --install-extension neptunedesign.vs-sequential-number --force
+# code --install-extension raidou.calc --force
+# code --install-extension nemesv.copy-file-name --force
+# code --install-extension jsynowiec.vscode-insertdatestring --force
 
 # MANUAL STEPS
 # Default application: Terminator
+# Synchronize VSCode
