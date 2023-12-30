@@ -17,17 +17,19 @@
       shell: xdg-user-dir DESKTOP
       register: user_desktop
 
-    - name: Download arm vscode
-      get_url: 
-        url: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-arm64" 
-        dest: "/tmp/vscode.deb"
-      when: ansible_architecture == 'aarch64' or ansible_architecture == 'arm64'
+    - name: Get architecture
+      shell: |
+        archi=$(uname -m)
+        if [[ "${archi}" == "aarch64" || "${archi}" == "arm64" ]]; then
+            echo "arm64"
+        else
+            echo "x64"
+        fi
+      register: archi
 
-    - name: Download x64 vscode
-      get_url: 
-        url: "https://code.visualstudio.com/sha/download?build=stable&os=x64" 
-        dest: "/tmp/vscode.deb"
-      when: ansible_architecture != 'aarch64' and ansible_architecture != 'arm64'
+    - name: Install vscode
+      apt: 
+        deb: "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-{{ archi.stdout }}" 
 
     - name: Install VSCode
       become: true
