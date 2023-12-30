@@ -151,6 +151,18 @@ sudo chmod +x /usr/local/bin/vpnchoice
 echo "alias vpnchoice='sudo vpnchoice'" >> ~/.zshrc
 sudo python3 -m pip install simple-term-menu
 
+# TOOLS
+echo "=============================="
+echo "Installing TOOLS"
+echo "=============================="
+echo '#!/bin/bash' > ~/Tools/update_tools.sh
+echo 'wget https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php -O ~/Tools/rev.php' >> ~/Tools/update_tools.sh
+echo 'wget https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh -O ~/Tools/linpeas.sh' >> ~/Tools/update_tools.sh
+echo 'wget https://github.com/DominicBreuker/pspy/releases/latest/download/pspy64 -O ~/Tools/pspy64' >> ~/Tools/update_tools.sh
+echo 'wget https://github.com/DominicBreuker/pspy/releases/latest/download/pspy32 -O ~/Tools/pspy32' >> ~/Tools/update_tools.sh
+chmod +x ~/Tools/update_tools.sh
+~/Tools/update_tools.sh
+
 # MANUAL STEPS
 echo " ------------------------------------- "
 echo "| MANUAL STEPS                        |"
