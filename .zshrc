@@ -82,8 +82,14 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# Add IP to prompt
+IP=$(ip -br addr show | grep -i "tun" | sed -r 's/ +/ /g' | cut -f3 -d" " | sed -r 's/\/.+//g' | head -n1)
+if [[ -z $IP ]]; then
+    IP=$(ip -br addr show | grep -i "eth" | sed -r 's/ +/ /g' | cut -f3 -d" " | sed -r 's/\/.+//g' | head -n1)
+fi
+
 if [ "$color_prompt" = yes ]; then
-    PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)──}$(venv_info)(%B%F{%(#.red.blue)}%n%(#.💀.㉿)%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
+	PROMPT=$'%F{%(#.blue.green)}┌──${debian_chroot:+($debian_chroot)──}$(venv_info)(%B%F{%(#.red.blue)}%n%(#.💀.㉿)%m%b%F{%(#.blue.green)})(%F{yellow}$IP%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n└─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
     RPROMPT=$'%(?.. %? %F{red}%B⨯%b%F{reset})%(1j. %j %F{yellow}%B⚙%b%F{reset}.)'
 
     # enable syntax-highlighting
@@ -204,5 +210,7 @@ if [ -f /etc/zsh_command_not_found ]; then
 fi
 
 alias ll='ls --color=always -hla'
+alias h='history'
 export WPTOKEN="sp5LfkrHMusAF5wlZhElVEIqBkwyF4jBLXN74DHXfs0"
+alias openport="awk -F/ '/open/{print \$1}{ORS=\",\"}'"
 
