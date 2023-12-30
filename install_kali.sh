@@ -58,44 +58,44 @@ echo "=============================="
 echo "Installing UPLOAD"
 echo "=============================="
 wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/upload_file_wget.sh
-mv upload_file_wget.sh /usr/local/bin/upload_file_wget
-chmod +x /usr/local/bin/upload_file_wget
+sudo mv upload_file_wget.sh /usr/local/bin/upload_file_wget
+sudo chmod +x /usr/local/bin/upload_file_wget
 
 # MONIP
 echo "=============================="
 echo "Installing MONIP"
 echo "=============================="
 wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/monip.sh
-mv monip.sh /usr/local/bin/monip
-chmod +x /usr/local/bin/monip
+sudo mv monip.sh /usr/local/bin/monip
+sudo chmod +x /usr/local/bin/monip
 
 # NMAPER
 echo "=============================="
 echo "Installing NMAPER"
 echo "=============================="
 wget https://raw.githubusercontent.com/OlivierProTips/nmaper/master/nmaper.py
-mv nmaper.py /usr/local/bin/nmaper
-chmod +x /usr/local/bin/nmaper
+sudo mv nmaper.py /usr/local/bin/nmaper
+sudo chmod +x /usr/local/bin/nmaper
 
 # ip_widget
 echo "=============================="
 echo "Installing ip_widget"
 echo "=============================="
 wget https://raw.githubusercontent.com/OlivierProTips/HackNotes/main/scripts/ip_widget.sh
-mv ip_widget.sh /usr/local/bin
+sudo mv ip_widget.sh /usr/local/bin
 
 # LESS
 echo "=============================="
 echo "Installing LESS"
 echo "=============================="
-mv less.sh /usr/local/bin
+sudo mv less.sh /usr/local/bin
 
 # BURPSUITE
 echo "=============================="
 echo "Installing BURPSUITE"
 echo "=============================="
-mv burp* /usr/local/bin
-chmod +x /usr/local/bin/burp*
+sudo mv burp* /usr/local/bin
+sudo chmod +x /usr/local/bin/burp*
 echo
 echo "DO NOT FORGET TO DOWNLOAD BURPSUITE JAR AND INSTALL IT WITH burp_update"
 echo
