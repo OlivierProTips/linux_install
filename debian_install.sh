@@ -65,7 +65,7 @@ DEBIAN_FRONTEND=noninteractive apt update
 
 # Install packages
 banner "Install packages"
-apt install git vim htop sudo wget nfs-common ncdu -y
+apt install git vim htop sudo wget nfs-common ncdu-y
 
 banner "Install msmtp-mta bsd-mailx"
 apt install msmtp-mta bsd-mailx -y

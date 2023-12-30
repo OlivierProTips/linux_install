@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install dnsmasq
-sudo apt install dnsmasq -y
+# sudo apt install dnsmasq -y
 
 # Add dns=dnsmasq to /etc/NetworkManager/NetworkManager.conf
 NetworkManager_file="/etc/NetworkManager/NetworkManager.conf"
@@ -14,15 +14,15 @@ else
 fi
 
 # Uncomment conf-dir in /etc/dnsmasq.conf
-sudo sed -i '/conf-dir=\/etc\/dnsmasq.d\/,\*.conf/s/^#//g' /etc/dnsmasq.conf
+# sudo sed -i '/conf-dir=\/etc\/dnsmasq.d\/,\*.conf/s/^#//g' /etc/dnsmasq.conf
 
 # Create a personal conf file
-cat <<'EOF' | sudo tee /etc/dnsmasq.d/perso.conf
+cat <<'EOF' | sudo tee /etc/NetworkManager/dnsmasq.d/perso.conf
 server=8.8.8.8
 
 address=/.example.com/93.184.216.34
 EOF
 
 # Enable and start the service
-sudo systemctl enable dnsmasq --now
+# sudo systemctl enable dnsmasq --now
 sudo systemctl restart NetworkManager
