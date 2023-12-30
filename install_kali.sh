@@ -161,11 +161,11 @@ chmod +x ~/Tools/update_tools.sh
 ~/Tools/update_tools.sh
 
 # RESIZER
-echo "=============================="
-echo "Installing RESIZER on UTM"
-echo "=============================="
 if [[ "$(systemd-detect-virt | awk '{print tolower($0)}')" == "qemu" ]]
 then
+    echo "=============================="
+    echo "Installing RESIZER on UTM"
+    echo "=============================="
     echo 'xrandr -s 1280x768' > $(xdg-user-dir DESKTOP)/medium.sh
     echo 'xrandr -s 1920x1080' > $(xdg-user-dir DESKTOP)/high.sh
     echo 'xrandr --output Virtual-1 --auto' > $(xdg-user-dir DESKTOP)/auto.sh
