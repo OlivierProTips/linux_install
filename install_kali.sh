@@ -19,18 +19,18 @@ sudo DEBIAN_FRONTEND=noninteractive apt update
 sudo DEBIAN_FRONTEND=noninteractive apt dist-upgrade -y
 
 # VSCODE
-echo "=============================="
-echo "Installing VSCODE"
-echo "=============================="
-sudo apt install software-properties-common apt-transport-https wget -y
-wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-sudo add-apt-repository "deb [arch=${arch,,}] https://packages.microsoft.com/repos/vscode stable main"
-sudo apt update
-sudo apt install code -y
+# echo "=============================="
+# echo "Installing VSCODE"
+# echo "=============================="
+# sudo apt install software-properties-common apt-transport-https wget -y
+# wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+# sudo add-apt-repository "deb [arch=${arch,,}] https://packages.microsoft.com/repos/vscode stable main"
+# sudo apt update
+# sudo apt install code -y
 
-code --install-extension donjayamanne.python-extension-pack --force
-code --install-extension donjayamanne.git-extension-pack --force
-code --install-extension ms-vscode.sublime-keybindings --force
+# code --install-extension donjayamanne.python-extension-pack --force
+# code --install-extension donjayamanne.git-extension-pack --force
+# code --install-extension ms-vscode.sublime-keybindings --force
 
 # TERMINATOR
 echo "=============================="
