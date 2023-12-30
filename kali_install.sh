@@ -104,9 +104,10 @@ sudo apt install gobuster -y
 
 # PWNCAT-CS
 banner "Installing PWNCAT-CS"
-sudo DEBIAN_FRONTEND=noninteractive apt install python3.11-venv -y
+sudo DEBIAN_FRONTEND=noninteractive apt install python3-pip -y
+sudo pip install virtualenv
 mkdir ~/Tools
-python3 -m venv ~/Tools/pwncat-env
+virtualenv ~/Tools/pwncat-env
 source ~/Tools/pwncat-env/bin/activate
 pip install pwncat-cs
 deactivate
