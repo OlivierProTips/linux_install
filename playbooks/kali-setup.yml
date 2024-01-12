@@ -54,31 +54,32 @@
         name: 
           - burpsuite
           - curl
-          - dnsrecon
           - enum4linux
           - feroxbuster
           - gobuster
           - golang-go
           - impacket-scripts
-          - nbtscan
           - ncdu
           - nikto
           - nmap
-          - onesixtyone
-          - oscanner
           - python3-pip
           - python3.11-venv
-          - redis-tools
           - seclists
-          - sipvicious
           - smbclient
           - smbmap
           - snmp
-          - sslscan
           - terminator
-          - tnscmd10g
-          - whatweb
-          - wkhtmltopdf
+          - tor
+          # - dnsrecon
+          # - nbtscan
+          # - onesixtyone
+          # - oscanner
+          # - redis-tools
+          # - sipvicious
+          # - sslscan
+          # - tnscmd10g
+          # - whatweb
+          # - wkhtmltopdf
         state: present
 
     - name: Create terminator config folder
@@ -124,7 +125,7 @@
         python3 -m pip install --user pipx
         export PATH="$PATH:/home/{{ user_name.stdout }}/.local/bin"
         pipx install pwncat-cs
-        pipx install git+https://github.com/Tib3rius/AutoRecon.git
+      # pipx install git+https://github.com/Tib3rius/AutoRecon.git
 
     - name: Setting VIM
       become: true
