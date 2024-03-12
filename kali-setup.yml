@@ -1,13 +1,7 @@
 ---
-- hosts: kali
+- hosts: localhost
 
   tasks:
-    # - name: Update and upgrade apt packages
-    #   become: true
-    #   apt:
-    #     upgrade: yes
-    #     update_cache: yes
-    #     cache_valid_time: 86400 #One day
 
     - name: Get user name
       shell: whoami
@@ -69,17 +63,6 @@
           - smbmap
           - terminator
           - tor
-          # - snmp
-          # - dnsrecon
-          # - nbtscan
-          # - onesixtyone
-          # - oscanner
-          # - redis-tools
-          # - sipvicious
-          # - sslscan
-          # - tnscmd10g
-          # - whatweb
-          # - wkhtmltopdf
         state: present
 
     - name: Create terminator config folder
@@ -88,8 +71,8 @@
         state: directory
 
     - name: Copy terminator config file
-      copy:
-        src: "terminator_config"
+      get_url:
+        url: "https://raw.githubusercontent.com/OlivierProTips/kali-resources/master/terminator_config"
         dest: "~/.config/terminator/config"
 
     - name: Unpack rockyou
@@ -97,14 +80,9 @@
       shell: gunzip -d /usr/share/wordlists/rockyou.txt.gz
       ignore_errors: yes
 
-    # - name: Copy .zshrc
-    #   copy:
-    #     src: ".zshrc"
-    #     dest: "~/.zshrc"
-
     - name: Copy aliases
-      copy:
-        src: ".aliases"
+      get_url:
+        url: "https://raw.githubusercontent.com/OlivierProTips/kali-resources/master/.aliases"
         dest: "~"
 
     - name: Load aliases in .zshrc
@@ -120,12 +98,11 @@
         dest: "~/.zshrc"
         line: 'export PATH="$PATH:/home/{{ user_name.stdout }}/.local/bin"'
 
-    - name: Install pipx / pwncat-cs / autorecon
+    - name: Install pipx / pwncat-cs
       shell: |
         python3 -m pip install --user pipx
         export PATH="$PATH:/home/{{ user_name.stdout }}/.local/bin"
         pipx install pwncat-cs
-      # pipx install git+https://github.com/Tib3rius/AutoRecon.git
 
     - name: Setting VIM
       become: true
@@ -140,15 +117,16 @@
 
     - name: Copy scripts
       become: true
-      copy:
-        src: "{{ item }}"
+      get_url:
+        url: "{{ item }}"
         dest: "/usr/local/bin/"
         mode: "+x"
       with_items:
-        - "upload"
-        - "monip"
-        - "nmaper"
-        - "vpnchoice"
+        - "https://raw.githubusercontent.com/OlivierProTips/kali-resources/master/upload"
+        - "https://raw.githubusercontent.com/OlivierProTips/kali-resources/master/monip"
+        - "https://raw.githubusercontent.com/OlivierProTips/kali-resources/master/nmaper"
+        - "https://raw.githubusercontent.com/OlivierProTips/kali-resources/master/vpnchoice"
+        - "https://raw.githubusercontent.com/OlivierProTips/kali-resources/master/dnsmasq-update"
 
     - name: Create vpnchoice folder
       file:
@@ -162,19 +140,6 @@
     - name: Install updog
       become: true
       shell: python3 -m pip install updog
-
-    # - name: Copy arm burpsuite script
-    #   become: true
-    #   copy:
-    #     src: "burpsuite"
-    #     dest: "/usr/local/bin/"
-    #     mode: "+x"
-    #   when: ansible_architecture == 'aarch64' or ansible_architecture == 'arm64'
-    
-    # - name: Install arm burpsuite
-    #   become: true
-    #   shell: /usr/local/bin/burpsuite -u
-    #   when: ansible_architecture == 'aarch64' or ansible_architecture == 'arm64'
 
     - name: Create Tools folder
       file:
@@ -193,14 +158,14 @@
         ./update-resources.sh
 
     - name: Install resizer
-      copy:
-        src: "{{ item }}"
+      get_url:
+        url: "{{ item }}"
         dest: "{{ user_desktop.stdout }}"
         mode: "+x"
       with_items:
-        - "medium.sh"
-        - "high.sh"
-        - "auto.sh"
+        - "https://raw.githubusercontent.com/OlivierProTips/kali-resources/master/medium.sh"
+        - "https://raw.githubusercontent.com/OlivierProTips/kali-resources/master/high.sh"
+        - "https://raw.githubusercontent.com/OlivierProTips/kali-resources/master/auto.sh"
       when: virt_env.stdout == "qemu" or virt_env.stdout == "vmware"
 
     - name: Install ligolo-ng
@@ -222,13 +187,3 @@
         else
             sudo sed -i '/\[main\]/a dns=dnsmasq' ${NetworkManager_file}
         fi
-
-    - name: Create dnsmasq file
-      become: true
-      blockinfile:
-        path: /etc/NetworkManager/dnsmasq.d/perso.conf
-        create: true
-        block: |
-          server=8.8.8.8
-
-          address=/.example.com/93.184.216.34
