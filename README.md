@@ -3,11 +3,7 @@
 ## Kali
 
 ```bash
-brew install ansible
-brew install esolitos/ipa/sshpass
-```
-
-```bash
-export ANSIBLE_HOST_KEY_CHECKING=False
-ansible-playbook -i kali.ini kali-setup.yml -u kali -k -K
+sudo apt update && sudo apt install ansible -y
+curl https://raw.githubusercontent.com/OlivierProTips/linux_install/kali/kali-setup.yml -o kali-setup.yml
+ansible-playbook kali-setup.yml
 ```
