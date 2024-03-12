@@ -1,9 +1,13 @@
-# linux_install
+# Ansible Playbooks
 
-The shell scripts to install kali / debian / dnsmasq are deprecated and not maintained anymore. I now use [Ansible](playbooks/readme.md).
+## Kali
 
-- [debian-setup.yml](playbooks/debian-setup.yml)
-- [kali-setup.yml](playbooks/kali-setup.yml)
-- [dnsmasq.md](https://github.com/OlivierProTips/HackNotes/blob/main/dnsmasq.md)
+```bash
+brew install ansible
+brew install esolitos/ipa/sshpass
+```
 
-I leave the scripts here for reference.
+```bash
+export ANSIBLE_HOST_KEY_CHECKING=False
+ansible-playbook -i kali.ini kali-setup.yml -u kali -k -K
+```
